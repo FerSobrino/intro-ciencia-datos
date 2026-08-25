@@ -159,17 +159,16 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 - Semanas 4–6: EDA y visualización
 - Semanas 7–9: Aprendizaje supervisado — teoría, `sklearn`, métricas — *Examen 1 (semana 7)*
 - Semanas 10–11: Aprendizaje no supervisado (clustering) — *Examen 2 (semana 11)*
-- Semana 12: colchón — defensas pendientes y repaso
+- Semana 12: colchón — repaso o lo que se haya recorrido
 
 ## Evaluación
 
 | Componente | Peso |
 |---|---|
 | Tareas (8, IA permitida con transcripción; se elimina la más baja) | 25% |
-| Defensas orales (2 por estudiante, 10 min) | 20% |
 | Exámenes en clase (2, escritos, sin computadora) | 35% |
-| Ejercicios "Critica a la IA" (4, cuentan 3) | 15% |
-| Participación | 5% |
+| Ejercicios "Critica a la IA" (4, en parejas; cuentan las mejores 3) | 30% |
+| Participación | 10% |
 
 - Temarios de exámenes en `Examenes/`; rúbricas en `Evaluacion/`
 
@@ -178,17 +177,17 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 - En **tareas**: cualquier LLM o agente permitido
   - Transcripción íntegra obligatoria — sin ella, la tarea no se califica
   - Toda tarea cierra con una sección de **Verificación**
-- En **exámenes y defensas**: sin IA
+- En **exámenes y críticas en clase**: sin IA
   - Los exámenes no piden código: piden interpretar, diagnosticar, justificar
-  - En la defensa explicas *tu* tarea y la modificas en vivo
-- Eres responsable de todo lo que entregas: "lo escribió el agente" no es defensa
+  - En las críticas la IA ya hizo su parte: el análisis con errores que van a revisar
+- Eres responsable de todo lo que entregas: "lo escribió el agente" no es excusa
 
-## Defensas orales: qué esperar
+## Critica a la IA: qué esperar
 
-- Dos veces en el semestre, 10 minutos
-- Yo elijo cuál de tus tareas defiendes
-- Explicas tu código, justificas decisiones, haces una modificación pequeña en vivo
-- El mejor entrenamiento: antes de entregar, pregúntate *"¿puedo defender esto?"*
+- Cuatro sesiones en el semestre (cuentan las mejores 3), en parejas
+- Reciben por Canvas un análisis hecho por un agente: corre sin errores, se ve profesional, y tiene entre 3 y 5 problemas plantados
+- **45 minutos** para encontrarlos, demostrarlos con evidencia y proponer la corrección; suben su notebook a Canvas al terminar
+- El mejor entrenamiento: la sección de *Verificación* de cada tarea
 
 ## Herramientas
 

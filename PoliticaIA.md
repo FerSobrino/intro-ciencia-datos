@@ -32,19 +32,19 @@ es hacer, y prohibida donde el trabajo es demostrar que entiendes.**
    descartarlos.
 
 Eres responsable de todo lo que entregas. "Lo escribió el agente" no
-es defensa de un resultado incorrecto.
+es defensa de un resultado incorrecto. Si usas librerías que no veamos
+en clase, debes saber qué hacen y por qué las necesitas.
 
-## En los exámenes y defensas orales: sin IA
+## En los exámenes y críticas en clase: sin IA
 
 - Los dos exámenes son en clase, individuales, a lápiz y papel, sin
   computadora. No piden escribir código: piden interpretar resultados,
   diagnosticar errores y justificar decisiones — exactamente lo que
   necesitas para dirigir (y verificar) a un agente que sí escribe el
   código.
-- En las defensas orales presentas tu propia tarea, sin asistente. Si
-  usaste IA para producirla, perfecto — pero tienes que poder explicar
-  y modificar cada parte. Si usas librerias que no veamos en clase debes 
-  de saber que hacen y porque las necesitas. 
+- En las sesiones de "Critica a la IA" trabajas con computadora pero
+  sin IA: la IA ya hizo su parte (el análisis con errores que vas a
+  revisar).
 
 ## Colaboración entre personas
 

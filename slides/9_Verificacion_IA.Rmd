@@ -32,7 +32,7 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 - Experimento aleatorizado con ~1,000 estudiantes (Bastani et al., 2025): acceso libre a GPT-4 → **+48% en las prácticas, −17% en el examen**
 - Estudios con novatos programando (Prather et al., 2024): quien no domina los fundamentos desarrolla una **ilusión de competencia** — completa la tarea sin entenderla
 - Moraleja del curso: la IA amplifica lo que ya sabes; no sustituye saberlo
-- Por eso: tareas con IA + transcripción, exámenes y defensas sin IA
+- Por eso: tareas con IA + transcripción; exámenes y críticas en clase sin IA
 
 ## No puedes verificar lo que no podrías haber escrito
 

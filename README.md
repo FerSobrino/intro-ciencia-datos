@@ -23,7 +23,7 @@ Por eso:
    el piso, no el techo.
 2. **No prohibimos la IA.** Pueden (y deben) usar LLMs y agentes en
    las tareas, con transcripción obligatoria. Los exámenes y las
-   defensas orales son sin IA: ahí se ve lo que de verdad entiendes.
+   críticas en clase son sin IA: ahí se ve lo que de verdad entiendes.
 3. **Practicamos la crítica.** Cuatro sesiones calificadas en clase
    consisten en encontrar los errores de un análisis hecho por IA.
 
@@ -35,19 +35,14 @@ entendimiento.*
 | Componente | Peso | Detalle |
 |---|---|---|
 | Tareas (8) | 25% | IA permitida con transcripción; se elimina la más baja |
-| Defensas orales (2 por estudiante) | 20% | 10 min; defiendes una tarea que yo elijo |
 | Exámenes en clase (2) | 35% | Escritos, sin computadora (15% + 20%) |
-| Ejercicios "Critica a la IA" (4) | 15% | En clase; cuentan las mejores 3 |
-| Participación | 5% | |
+| Ejercicios "Critica a la IA" (4) | 30% | En clase, en parejas; cuentan las mejores 3 (10% c/u) |
+| Participación | 10% | |
 
 - **Tareas**: notebooks entregados en Canvas, con sección obligatoria
   de *Verificación* y la transcripción íntegra de tus conversaciones
   con IA (ver [PoliticaIA.md](PoliticaIA.md)). Sin transcripción, la
   tarea no se califica.
-- **Defensas orales**: dos veces en el semestre defiendes en 10
-  minutos una de tus tareas ya entregadas — yo elijo cuál, con 48
-  horas de anticipación. Protocolo y rúbrica en
-  [Evaluacion/DefensaOral.md](Evaluacion/DefensaOral.md).
 - **Exámenes**: en clase, individuales, lápiz y papel. No piden
   escribir código: piden interpretar, diagnosticar y justificar.
   Temarios en [Examenes/](Examenes/).
@@ -61,20 +56,20 @@ entendimiento.*
 
 ## Temario semanal (una sesión por semana)
 
-| Semana | Temas | Tareas | Exámenes | Defensas |
+| Semana | Temas | Tareas | Crítica IA | Exámenes |
 |---|---|---|---|---|
 | 1 | Introducción y política de IA · Pandas I | | | |
 | 2 | Pandas II · Tidy I | | | |
 | 3 | Tidy II · Verificación de análisis con IA | T1 | | |
-| 4 | **Crítica #1** · EDA I | T2 | | |
-| 5 | EDA II · Visualización I | T3 | | ronda 1 |
-| 6 | Visualización II · **Crítica #2** | T4 | | ronda 1 |
-| 7 | ML Teoría I | T5 | **Examen 1** | ronda 1 |
+| 4 | EDA I | T2 | **Crítica #1** | |
+| 5 | EDA II · Visualización I | T3 | | |
+| 6 | Visualización II | T4 | **Crítica #2** | |
+| 7 | ML Teoría I | T5 | | **Examen 1** |
 | 8 | ML Teoría II y III | T6 | | |
-| 9 | Aprendizaje supervisado en sklearn · **Crítica #3** | | | ronda 2 |
-| 10 | Clustering | T7 | | ronda 2 |
-| 11 | **Crítica #4** | T8 | **Examen 2** | ronda 2 |
-| 12 | *Colchón:* repaso o lo que se haya recorrido | | | defensas pendientes |
+| 9 | Aprendizaje supervisado en sklearn | | **Crítica #3** | |
+| 10 | Clustering | T7 | | |
+| 11 | Repaso | T8 | **Crítica #4** | **Examen 2** |
+| 12 | *Colchón:* repaso o lo que se haya recorrido | | | |
 
 
 ## Política de IA (resumen)
@@ -84,7 +79,7 @@ La política completa está en [PoliticaIA.md](PoliticaIA.md). En corto:
 - En **tareas**: cualquier LLM o agente está permitido. Entregas la
   transcripción completa junto con el notebook. Sin transcripción (o
   con una que no corresponde a tu trabajo), la tarea se anula.
-- En **exámenes y defensas**: sin IA.
+- En **exámenes y críticas en clase**: sin IA.
 - Eres responsable de todo lo que entregas: "lo escribió el agente" no
   es defensa de un resultado incorrecto.
 
@@ -100,7 +95,7 @@ vez — guía paso a paso (Colab o instalación local) en
 - `tareas/` — las 8 tareas
 - `data/` — bases de datos del curso
 - `Examenes/` — temarios de los dos exámenes
-- `Evaluacion/` — protocolo de defensas y guía de críticas
+- `Evaluacion/` — guía de las sesiones de crítica
 - `criticas/` — notebooks de las sesiones "Critica a la IA"
 - `materials/` — archivo histórico de slides anteriores
 

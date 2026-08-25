@@ -153,5 +153,5 @@ cámbiate a local — los notebooks son los mismos.
 - **El notebook corre distinto que ayer** → `Kernel → Restart & Run All`
   (en Colab: `Entorno de ejecución → Reiniciar y ejecutar todo`); el
   orden de ejecución importa y esta es la forma de verificarlo antes
-  de entregar. La defensa oral se hace sobre un notebook que corre de
+  de entregar: una tarea se califica sobre un notebook que corre de
   arriba a abajo.

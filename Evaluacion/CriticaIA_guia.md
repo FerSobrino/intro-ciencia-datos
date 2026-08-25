@@ -1,7 +1,7 @@
 # Sesiones "Critica a la IA" — guía y rúbrica
 
-**Peso:** 15% de la calificación final (4 sesiones; cuentan las
-mejores 3, 5% cada una).
+**Peso:** 30% de la calificación final (4 sesiones; cuentan las
+mejores 3, 10% cada una).
 **Formato:** en clase, en parejas, **45 minutos** + 10 de plenaria. Con
 computadora, **sin IA** (la IA ya hizo su parte: el análisis que van a
 criticar). Al cumplirse los 45 minutos, cada pareja sube su notebook
