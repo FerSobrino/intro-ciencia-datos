@@ -147,13 +147,12 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 \raggedright
 - El boxplot marca como atípico lo que cae fuera de los bigotes (1.5 × IQR)
 - En un histograma se ven poniendo un **límite al eje y**: son tan pocos que no se distinguen del cero
-- Diamantes con ancho 0 mm o 58 mm no son outliers estadísticos: son **errores de captura**
 :::
 :::::
 
 ## Valores extremos: qué hacer con ellos
 
-Tres opciones, ninguna gratis:
+Tres opciones, todas tienen consecuencias:
 
 - **Tirarlos** — pierdes información y sesgas si el extremo es real
 - **Convertirlos en faltantes** — conservas el renglón, marcas la duda
@@ -166,13 +165,13 @@ Tres opciones, ninguna gratis:
 
 # Valores faltantes
 
-## Un faltante no siempre se llama NaN
+## Un faltante no siempre va a ser un NaN
 
-- Revisa **siempre el diccionario de datos**: no es lo mismo un dato faltante, un "No aplica" y un cero
-- Los códigos centinela (`-99`, `999`, `-1`, `""`, `"N/A"`) entran como números y **contaminan promedios sin avisar**
+- Revisa siempre el diccionario de datos: no es lo mismo un dato faltante, un "No aplica" y un cero
+- Los códigos centinela (`-99`, `999`, `-1`, `""`, `"N/A"`) entran como números y van a contaminar el análisis si no te das cuenta
 - Los infinitos (`np.inf`) son otro caso: no son nulos, y `isnull()` no los ve
 - `pandas` usa dos representaciones: `np.nan` (float, rápido, de NumPy) y `None` (objeto de Python, lento)
-- Detectar es fácil (`isnull`, `notnull`, `dropna`, `fillna`); lo importante es el **patrón**:
+- Detectar es fácil (`isnull`, `notnull`, `dropna`, `fillna`); lo importante es el patrón:
   - por columna: ¿hay una variable que casi nadie contestó?
   - por renglón: ¿hay un grupo de observaciones que no contestó casi nada?
 
@@ -180,22 +179,21 @@ Tres opciones, ninguna gratis:
 
 Rubin (1976). El tratamiento correcto depende de **por qué** falta el dato:
 
-- **MCAR** (*completely at random*): la falta no se correlaciona con nada observado. La no respuesta a "ingreso" es independiente de escolaridad o pobreza. **No sesga**
-- **MAR** (*at random*): la falta depende de variables **observadas**. No responden ingreso los de menor escolaridad — y la escolaridad sí la tienes. **Sesga si no lo tratas**
-- **MNAR** (*not at random*): la falta depende del valor **no observado**. No responden ingreso justamente los de ingreso alto. **El caso feo**: no se puede diagnosticar con los datos, requiere conocimiento del tema
+- **MCAR** (*completely at random*): la falta no se correlaciona con nada observado. La no respuesta a "ingreso" es independiente de escolaridad o pobreza. No sesga
+- **MAR** (*at random*): la falta depende de variables observadas. No responden ingreso los de menor escolaridad — y la escolaridad sí la tienes. Sesga si no lo tratas
+- **MNAR** (*not at random*): la falta depende del valor no observado. No responden ingreso justamente los de ingreso alto. No se puede diagnosticar con los datos, requiere conocimiento del tema
 
-- Se diagnostica comparando a los que sí contestaron contra los que no, en las variables que sí tienes. Eso distingue MCAR de MAR — **nunca MNAR**
+- Se diagnostica comparando a los que sí contestaron contra los que no, en las variables que sí tienes. Eso distingue MCAR de MAR pero nunca MNAR
 
-## Por qué "borrar los NaN" sesga
+## Por qué no hay que borrar los NaN
 
-- `dropna()` es la primera línea que escribe cualquier agente. Dos problemas:
+- `dropna()` puede parecer lo primero que hay que hacer pero hay dos problemas con esto:
 
-**1. Te quedas sin datos.** Con 100 columnas y ~12% de faltantes por columna, casi **ningún** renglón está completo. Hay un intercambio entre renglones completos y variables retenidas: a veces conviene tirar la columna, no el renglón
+**1. Te quedas sin datos.** Con 100 columnas y ~12% de faltantes por columna, casi ningún renglón está completo. Hay un intercambio entre renglones completos y variables retenidas: a veces conviene tirar la columna, no el renglón
 
-**2. Los que quedan no son como los que se fueron.** Si el mecanismo es MAR, el análisis de casos completos describe a **quienes sí respondieron**, no a la población
+**2. Los que quedan no son como los que se fueron.** Si el mecanismo es MAR, el análisis de casos completos describe a quienes sí respondieron, no a la población
 
 - Además, `groupby().mean()` descarta faltantes en silencio: "el promedio de todos" en realidad es "el promedio de los que tenían dato"
-- Mínimo exigible: reportar cuántos renglones se perdieron y **comparar los que se van contra los que se quedan**
 
 ## Tratamiento de los faltantes
 
@@ -206,29 +204,24 @@ Rubin (1976). El tratamiento correcto depende de **por qué** falta el dato:
 |-------------------|-------------------------------------|:------:|:-----:|
 | *Listwise deletion* | Eliminar el renglón con cualquier faltante (casos completos) | x | |
 | *Drop variable* | Eliminar la variable — si los faltantes se concentran en una columna | x | x |
-| Media / mediana | Sustituir por el centro. Media si es simétrica, **mediana si es sesgada** | x | |
+| Media / mediana | Sustituir por el centro. Media si es simétrica, mediana si es sesgada | x | |
 | Moda | Para variables discretas | x | |
-| Basada en modelo | Predecir el faltante con kNN, árboles, *random forest* | x | x |
+| Basada en modelo | Predecir el faltante con kNN, árboles, random forest | x | x |
 | Imputación múltiple | Imputar varias veces y promediar, para no subestimar la incertidumbre | x | x |
 
-\normalsize
 
-- Imputar la media **preserva la media y destroza la forma**: pico artificial en el centro, varianza subestimada
-- **Verifícalo**: grafica la densidad original contra la imputada. Si la forma cambió, la imputación inventó estructura
-- Regla de higiene que veremos en modelos: **imputa después del split, con estadísticas de train**
-
-# Correlaciones y cierre
+# Correlaciones
 
 ## La nube de puntos y el coeficiente de Pearson
 
 \begin{center}$\rho_{X,Y} = \dfrac{cov(X,Y)}{\sigma_X \sigma_Y}$\end{center}
 
-- Mide fuerza y dirección de una relación **lineal**, entre −1 y 1
-- La nube de puntos va **antes** que el coeficiente: el número resume, la nube explica
+- Mide fuerza y dirección de una relación lineal, entre −1 y 1
+- La nube de puntos va antes que el coeficiente: el número resume, la nube explica
 - Con dos variables: scatter con recta ajustada, y las marginales al lado para no perder de vista cada distribución
-- Con un grupo de variables: matriz de correlación o `clustermap` para agrupar las que se mueven juntas — pero **léela como mapa, no como conclusión**
+- Con un grupo de variables: matriz de correlación o `clustermap` para agrupar las que se mueven juntas — pero léela como mapa, no como conclusión
 - Con dos categóricas: una tabla cruzada de frecuencias, vista como mapa de calor
-- Y siempre: ¿la relación se mantiene **dentro** de cada subgrupo, o solo entre grupos?
+
 
 ## Las trampas de la correlación
 
@@ -242,11 +235,11 @@ Rubin (1976). El tratamiento correcto depende de **por qué** falta el dato:
 \vspace{0.2em}
 
 1. **Correlación ≠ causalidad**, y con suficientes variables siempre encuentras una correlación alta por azar
-2. Pearson **solo ve líneas**: una U perfecta tiene correlación ≈ 0. Si la nube no es una "línea difusa", sigue investigando
+2. Pearson solo ve líneas: una U perfecta tiene correlación ≈ 0
 3. Un solo outlier puede crear o destruir una correlación (Anscombe III y IV)
-4. Fíjate hasta en el eje: en la gráfica de piratas el eje x **ni siquiera está ordenado**
 
-## La regla del curso
+
+## Reglas útiles
 
 \vspace{0.8em}
 
@@ -254,32 +247,20 @@ Rubin (1976). El tratamiento correcto depende de **por qué** falta el dato:
 
 \vspace{0.8em}
 
-- Puedes **agregar** columnas (`y_winsor`, `ba_imputada`, `es_outlier`), nunca borrar renglones, columnas o celdas del archivo fuente
+- Puedes agregar columnas (`y_winsor`, `ba_imputada`, `es_outlier`), nunca borrar renglones, columnas o celdas del archivo fuente
 - Todo filtro y toda imputación vive en el código, no en el archivo: así el análisis es reproducible y auditable
 - Documenta cada decisión: cuántos renglones quitaste, con qué criterio y qué pasa si no los quitas
-- Y la pregunta de cierre del EDA: **¿la conclusión sobrevive si tomo la otra decisión razonable?**
+- Y la pregunta de cierre del EDA: ¿la conclusión sobrevive si tomo la otra decisión razonable?
 
-# Al notebook
 
-## Lo que vamos a hacer en `EDA.ipynb`
-
-1. **matplotlib y seaborn** en breve, sobre series económicas de EE.UU.
-2. **Distribuciones discretas**: `countplot`, categorías ordinales, colas largas de categorías
-3. **Distribuciones continuas**: histogramas, `bins`, densidad y ancho de banda; variables asimétricas, log, raíz y gráfico QQ
-4. **Outliers**: boxplot, límites del eje, y las tres opciones (tirar, `NaN`, winsorizar)
-5. **Faltantes**: detección, patrón por columna y renglón, diagnóstico MCAR/MAR, `dropna` vs. imputación (media, mediana, kNN) y qué le hace cada una a la distribución
-6. **Series de tiempo** y **correlaciones**: `regplot`, `jointplot`, `lmplot` por grupo, `pairplot`, mapas de calor y datos de mayor dimensionalidad
-
-- Los **ejercicios en clase** están marcados en el notebook — se hacen ahí, en el momento
-
-## Qué verificar cuando el agente hace esto
+## Qué verificar cuando un agente hace EDA
 
 1. **¿Graficó, o solo reportó estadísticas de resumen?** Un `describe()` sin histograma es Anscombe esperando a pasar. Pide la distribución de toda variable clave
 2. **¿Usó media donde la variable es sesgada?** Compara media y mediana; si difieren mucho y el reporte dice "promedio", el número está inflado por la cola
 3. **¿Cuántos renglones sobrevivieron?** Exige `len(df)` antes y después de cada `dropna()` o filtro, y la comparación entre quienes se fueron y quienes se quedaron
 4. **¿Justificó el mecanismo de faltantes?** Un `dropna()` o un `fillna(mean)` sin diagnóstico MCAR/MAR es una decisión escondida, no una limpieza
 
-## Qué verificar cuando el agente hace esto (cont.)
+## Qué verificar cuando un agente hace EDA
 
 5. **¿Revisó códigos centinela y valores imposibles?** `-99`, ceros donde no puede haberlos, topes de codificación: `min()`, `max()` y `value_counts()` de los extremos
 6. **¿Modificó la base original?** Cualquier archivo de datos que cambió de tamaño es una bandera roja: la limpieza va en el código
