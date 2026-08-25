@@ -164,7 +164,7 @@ ltximg/
 .secrets
 
 # claves de las sesiones Critica a la IA (solo instructora)
-criticas/claves/
+criticas/
 
 # datos grandes descargados on-demand
 notebooks/nyc_taxi_wide.parq

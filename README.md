@@ -51,9 +51,13 @@ entendimiento.*
 - **Exámenes**: en clase, individuales, lápiz y papel. No piden
   escribir código: piden interpretar, diagnosticar y justificar.
   Temarios en [Examenes/](Examenes/).
-- **Critica a la IA**: sesiones en clase donde recibes un análisis
-  plausible hecho por un agente y tienes que encontrar qué está mal.
-  Guía en [Evaluacion/CriticaIA_guia.md](Evaluacion/CriticaIA_guia.md).
+- **Critica a la IA**: sesiones en clase donde recibes (vía Canvas, al
+  iniciar la sesión) un análisis plausible hecho por un agente y tienes
+  que encontrar qué está mal. En parejas, sin IA, **45 minutos** para
+  encontrar los problemas, demostrarlos con evidencia y proponer la
+  corrección; al terminar suben su notebook con la celda de hallazgos a
+  Canvas. Guía completa en
+  [Evaluacion/CriticaIA_guia.md](Evaluacion/CriticaIA_guia.md).
 
 ## Temario semanal (una sesión por semana)
 

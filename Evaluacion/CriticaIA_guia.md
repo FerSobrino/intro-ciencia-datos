@@ -2,8 +2,11 @@
 
 **Peso:** 15% de la calificación final (4 sesiones; cuentan las
 mejores 3, 5% cada una).
-**Formato:** en clase, en parejas, 45–50 minutos. Con computadora,
-**sin IA** (la IA ya hizo su parte: el análisis que van a criticar).
+**Formato:** en clase, en parejas, **45 minutos** + 10 de plenaria. Con
+computadora, **sin IA** (la IA ya hizo su parte: el análisis que van a
+criticar). Al cumplirse los 45 minutos, cada pareja sube su notebook
+con la celda de hallazgos a Canvas — no hay entrega tardía ni para
+llevar a casa.
 
 ## La idea
 
@@ -44,9 +47,12 @@ verificación que lo descarta — así funciona la revisión de verdad.
 
 ## Para la profesora (logística)
 
-- Los notebooks viven en `criticas/critica_N.ipynb`; las claves con
-  los errores plantados y su demostración en `criticas/claves/`
-  (**no** se sube al repo, está en `.gitignore`).
-- Publicar el notebook en Canvas al inicio de la sesión, no antes.
-- Cierre de sesión (últimos 10 min): descubrir los errores plantados
-  en plenaria; cada pareja marca cuáles encontró.
+- La carpeta `criticas/` completa (notebooks y claves) vive **solo en
+  la máquina local** — está en `.gitignore` y NO existe en el repo
+  público, para que nadie pueda analizarla antes de la sesión.
+  **Respaldarla fuera del repo.**
+- Publicar el notebook en Canvas **al inicio de la sesión, nunca antes**.
+- Ritmo de la media sesión: ~5 min de arranque (parejas, reglas),
+  45 min de trabajo con corte de entrega en Canvas, ~10 min de
+  plenaria descubriendo los errores plantados con la clave; cada
+  pareja marca cuáles encontró.
