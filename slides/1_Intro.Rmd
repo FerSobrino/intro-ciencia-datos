@@ -165,10 +165,10 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 
 | Componente | Peso |
 |---|---|
-| Tareas (8, IA permitida con transcripción; se elimina la más baja) | 25% |
+| Tareas (8, IA permitida con transcripción) | 25% |
 | Exámenes en clase (2, escritos, sin computadora) | 35% |
-| Ejercicios "Critica a la IA" (4, en parejas; cuentan las mejores 3) | 30% |
-| Participación | 10% |
+| Ejercicios "Critica a la IA" (4, individuales; cuentan las mejores 3) | 30% |
+| Participación (ejercicios en vivo de los notebooks, *cold calling*) | 10% |
 
 - Temarios de exámenes en `Examenes/`; rúbricas en `Evaluacion/`
 
@@ -184,10 +184,11 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 
 ## Critica a la IA: qué esperar
 
-- Cuatro sesiones en el semestre (cuentan las mejores 3), en parejas
+- Cuatro sesiones en el semestre (cuentan las mejores 3), **individuales**
 - Reciben por Canvas un análisis hecho por un agente: corre sin errores, se ve profesional, y tiene entre 3 y 5 problemas plantados
-- **45 minutos** para encontrarlos, demostrarlos con evidencia y proponer la corrección; suben su notebook a Canvas al terminar
+- **45 minutos** para encontrarlos, demostrarlos con evidencia y proponer la corrección; subes tu notebook a Canvas al terminar
 - El mejor entrenamiento: la sección de *Verificación* de cada tarea
+- Participación: los ejercicios de los notebooks se resuelven **en vivo** en clase (*cold calling*) — sin IA, en el momento
 
 ## Herramientas
 

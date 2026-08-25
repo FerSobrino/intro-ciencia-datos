@@ -2,11 +2,11 @@
 
 **Peso:** 30% de la calificación final (4 sesiones; cuentan las
 mejores 3, 10% cada una).
-**Formato:** en clase, en parejas, **45 minutos** + 10 de plenaria. Con
-computadora, **sin IA** (la IA ya hizo su parte: el análisis que van a
-criticar). Al cumplirse los 45 minutos, cada pareja sube su notebook
-con la celda de hallazgos a Canvas — no hay entrega tardía ni para
-llevar a casa.
+**Formato:** en clase, **individual**, **45 minutos** + 10 de plenaria.
+Con computadora, **sin IA** (la IA ya hizo su parte: el análisis que van
+a criticar). Al cumplirse los 45 minutos, cada estudiante sube su
+notebook con la celda de hallazgos a Canvas — no hay entrega tardía ni
+para llevar a casa.
 
 ## La idea
 
@@ -52,7 +52,7 @@ verificación que lo descarta — así funciona la revisión de verdad.
   público, para que nadie pueda analizarla antes de la sesión.
   **Respaldarla fuera del repo.**
 - Publicar el notebook en Canvas **al inicio de la sesión, nunca antes**.
-- Ritmo de la media sesión: ~5 min de arranque (parejas, reglas),
-  45 min de trabajo con corte de entrega en Canvas, ~10 min de
+- Ritmo de la media sesión: ~5 min de arranque (reglas), 45 min de
+  trabajo individual con corte de entrega en Canvas, ~10 min de
   plenaria descubriendo los errores plantados con la clave; cada
-  pareja marca cuáles encontró.
+  quien marca cuáles encontró.

@@ -34,10 +34,10 @@ entendimiento.*
 
 | Componente | Peso | Detalle |
 |---|---|---|
-| Tareas (8) | 25% | IA permitida con transcripción; se elimina la más baja |
+| Tareas (8) | 25% | IA permitida con transcripción |
 | Exámenes en clase (2) | 35% | Escritos, sin computadora (15% + 20%) |
-| Ejercicios "Critica a la IA" (4) | 30% | En clase, en parejas; cuentan las mejores 3 (10% c/u) |
-| Participación | 10% | |
+| Ejercicios "Critica a la IA" (4) | 30% | En clase, individuales; cuentan las mejores 3 (10% c/u) |
+| Participación | 10% | Ejercicios en vivo de los notebooks (cold calling) |
 
 - **Tareas**: notebooks entregados en Canvas, con sección obligatoria
   de *Verificación* y la transcripción íntegra de tus conversaciones
@@ -48,11 +48,15 @@ entendimiento.*
   Temarios en [Examenes/](Examenes/).
 - **Critica a la IA**: sesiones en clase donde recibes (vía Canvas, al
   iniciar la sesión) un análisis plausible hecho por un agente y tienes
-  que encontrar qué está mal. En parejas, sin IA, **45 minutos** para
+  que encontrar qué está mal. Individual, sin IA, **45 minutos** para
   encontrar los problemas, demostrarlos con evidencia y proponer la
-  corrección; al terminar suben su notebook con la celda de hallazgos a
+  corrección; al terminar subes tu notebook con la celda de hallazgos a
   Canvas. Guía completa en
   [Evaluacion/CriticaIA_guia.md](Evaluacion/CriticaIA_guia.md).
+- **Participación**: en cada clase resolvemos en vivo los ejercicios de
+  los notebooks y voy nombrando a quien pasa a resolverlos (*cold
+  calling*) — sin IA, en el momento. No se trata de tenerlo perfecto,
+  sino de intentarlo con criterio: por eso programamos en clase.
 
 ## Temario semanal (una sesión por semana)
 
