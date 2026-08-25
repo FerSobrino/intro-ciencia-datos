@@ -159,7 +159,7 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 - Semanas 4–6: EDA y visualización
 - Semanas 7–9: Aprendizaje supervisado — teoría, `sklearn`, métricas — *Examen 1 (semana 7)*
 - Semanas 10–11: Aprendizaje no supervisado (clustering) — *Examen 2 (semana 11)*
-- Semana 12: colchón — repaso o lo que se haya recorrido
+- Son 11 semanas efectivas (una sesión del semestre cae en feriado)
 
 ## Evaluación
 

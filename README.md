@@ -73,7 +73,6 @@ entendimiento.*
 | 9 | Aprendizaje supervisado en sklearn | | **Crítica #3** | |
 | 10 | Clustering | T7 | | |
 | 11 | Repaso | T8 | **Crítica #4** | **Examen 2** |
-| 12 | *Colchón:* repaso o lo que se haya recorrido | | | |
 
 
 ## Política de IA (resumen)
