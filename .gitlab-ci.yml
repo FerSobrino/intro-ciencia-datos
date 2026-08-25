@@ -1,0 +1,52 @@
+# SPDX-FileCopyrightText: 2017-2022 Jens Lechtenbörger
+# SPDX-License-Identifier: CC0-1.0
+
+stages:
+  - build
+  - selenium
+  - deploy
+
+create-html:
+  stage: build
+  image: registry.gitlab.com/oer/emacs-reveal/emacs-reveal:9.12.0
+  before_script:
+    - git submodule sync --recursive
+    - git submodule update --init --recursive
+  script:
+    - emacs --batch --load elisp/publish.el
+    #- cp public/README.html public/index.html
+    - find public -type f -regex '.*\.\(html\|js\|css\)$' -exec gzip -f -k {} \;
+    - mkdir public/pdfs
+    - chmod 777 public/pdfs
+    - for f in $(ls public/0?*.html); do echo "$(pwd -P)/${f}" >> public/pdfs/urls.txt; done
+  artifacts:
+    paths:
+    - public
+    expire_in: 4 weeks
+  only:
+  - master
+
+generate-pdf:
+  stage: selenium
+  image: registry.gitlab.com/oer/emacs-reveal/selenium-chrome
+  services:
+    - selenium/standalone-chrome
+  script:
+    - python3 "/root/selenium-print-pdf.py" "$(pwd -P)/public/pdfs/urls.txt" selenium__standalone-chrome "$(pwd -P)/public/pdfs"
+  artifacts:
+    paths:
+      - public
+    expire_in: 4 weeks
+  only:
+    - master
+
+pages:
+  stage: deploy
+  script:
+    - echo "Dummy"
+  artifacts:
+    paths:
+      - public
+    expire_in: 4 weeks
+  only:
+    - master

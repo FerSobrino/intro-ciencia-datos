@@ -1,0 +1,105 @@
+,Unnamed: 0,GEOID,NAME,variable,estimate,moe
+0,1,1,Alabama,income,24476.0,136.0
+1,2,1,Alabama,rent,747.0,3.0
+2,3,2,Alaska,income,32940.0,508.0
+3,4,2,Alaska,rent,1200.0,13.0
+4,5,4,Arizona,income,27517.0,148.0
+5,6,4,Arizona,rent,972.0,4.0
+6,7,5,Arkansas,income,23789.0,165.0
+7,8,5,Arkansas,rent,709.0,5.0
+8,9,6,California,income,29454.0,109.0
+9,10,6,California,rent,1358.0,3.0
+10,11,8,Colorado,income,32401.0,109.0
+11,12,8,Colorado,rent,1125.0,5.0
+12,13,9,Connecticut,income,35326.0,195.0
+13,14,9,Connecticut,rent,1123.0,5.0
+14,15,10,Delaware,income,31560.0,247.0
+15,16,10,Delaware,rent,1076.0,10.0
+16,17,11,District of Columbia,income,43198.0,681.0
+17,18,11,District of Columbia,rent,1424.0,17.0
+18,19,12,Florida,income,25952.0,70.0
+19,20,12,Florida,rent,1077.0,3.0
+20,21,13,Georgia,income,27024.0,106.0
+21,22,13,Georgia,rent,927.0,3.0
+22,23,15,Hawaii,income,32453.0,218.0
+23,24,15,Hawaii,rent,1507.0,18.0
+24,25,16,Idaho,income,25298.0,208.0
+25,26,16,Idaho,rent,792.0,7.0
+26,27,17,Illinois,income,30684.0,83.0
+27,28,17,Illinois,rent,952.0,3.0
+28,29,18,Indiana,income,27247.0,117.0
+29,30,18,Indiana,rent,782.0,3.0
+30,31,19,Iowa,income,30002.0,143.0
+31,32,19,Iowa,rent,740.0,4.0
+32,33,20,Kansas,income,29126.0,208.0
+33,34,20,Kansas,rent,801.0,5.0
+34,35,21,Kentucky,income,24702.0,159.0
+35,36,21,Kentucky,rent,713.0,4.0
+36,37,22,Louisiana,income,25086.0,155.0
+37,38,22,Louisiana,rent,825.0,4.0
+38,39,23,Maine,income,26841.0,187.0
+39,40,23,Maine,rent,808.0,7.0
+40,41,24,Maryland,income,37147.0,152.0
+41,42,24,Maryland,rent,1311.0,5.0
+42,43,25,Massachusetts,income,34498.0,199.0
+43,44,25,Massachusetts,rent,1173.0,5.0
+44,45,26,Michigan,income,26987.0,82.0
+45,46,26,Michigan,rent,824.0,3.0
+46,47,27,Minnesota,income,32734.0,189.0
+47,48,27,Minnesota,rent,906.0,4.0
+48,49,28,Mississippi,income,22766.0,194.0
+49,50,28,Mississippi,rent,740.0,5.0
+50,51,29,Missouri,income,26999.0,113.0
+51,52,29,Missouri,rent,784.0,4.0
+52,53,30,Montana,income,26249.0,206.0
+53,54,30,Montana,rent,751.0,9.0
+54,55,31,Nebraska,income,30020.0,146.0
+55,56,31,Nebraska,rent,773.0,4.0
+56,57,32,Nevada,income,29019.0,213.0
+57,58,32,Nevada,rent,1017.0,6.0
+58,59,33,New Hampshire,income,33172.0,387.0
+59,60,33,New Hampshire,rent,1052.0,9.0
+60,61,34,New Jersey,income,35075.0,148.0
+61,62,34,New Jersey,rent,1249.0,4.0
+62,63,35,New Mexico,income,24457.0,214.0
+63,64,35,New Mexico,rent,809.0,6.0
+64,65,36,New York,income,31057.0,69.0
+65,66,36,New York,rent,1194.0,3.0
+66,67,37,North Carolina,income,26482.0,111.0
+67,68,37,North Carolina,rent,844.0,3.0
+68,69,38,North Dakota,income,32336.0,245.0
+69,70,38,North Dakota,rent,775.0,9.0
+70,71,39,Ohio,income,27435.0,94.0
+71,72,39,Ohio,rent,764.0,2.0
+72,73,40,Oklahoma,income,26207.0,101.0
+73,74,40,Oklahoma,rent,766.0,3.0
+74,75,41,Oregon,income,27389.0,146.0
+75,76,41,Oregon,rent,988.0,4.0
+76,77,42,Pennsylvania,income,28923.0,119.0
+77,78,42,Pennsylvania,rent,885.0,3.0
+78,79,44,Rhode Island,income,30210.0,259.0
+79,80,44,Rhode Island,rent,957.0,6.0
+80,81,45,South Carolina,income,25454.0,123.0
+81,82,45,South Carolina,rent,836.0,4.0
+82,83,46,South Dakota,income,28821.0,276.0
+83,84,46,South Dakota,rent,696.0,7.0
+84,85,47,Tennessee,income,25453.0,102.0
+85,86,47,Tennessee,rent,808.0,4.0
+86,87,48,Texas,income,28063.0,110.0
+87,88,48,Texas,rent,952.0,2.0
+88,89,49,Utah,income,27928.0,239.0
+89,90,49,Utah,rent,948.0,6.0
+90,91,50,Vermont,income,29351.0,361.0
+91,92,50,Vermont,rent,945.0,11.0
+92,93,51,Virginia,income,32545.0,202.0
+93,94,51,Virginia,rent,1166.0,5.0
+94,95,53,Washington,income,32318.0,113.0
+95,96,53,Washington,rent,1120.0,4.0
+96,97,54,West Virginia,income,23707.0,203.0
+97,98,54,West Virginia,rent,681.0,6.0
+98,99,55,Wisconsin,income,29868.0,135.0
+99,100,55,Wisconsin,rent,813.0,3.0
+100,101,56,Wyoming,income,30854.0,342.0
+101,102,56,Wyoming,rent,828.0,11.0
+102,103,72,Puerto Rico,income,,
+103,104,72,Puerto Rico,rent,464.0,6.0
