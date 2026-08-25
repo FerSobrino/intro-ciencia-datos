@@ -1,4 +1,4 @@
-# Examen 1 — Datos, EDA y Visualización (semana 6)
+# Examen 1 — Datos, EDA y Visualización (semana 7)
 
 **Formato:** en clase, individual, lápiz y papel. Sin computadora, sin IA.
 **Peso:** 15% de la calificación final.

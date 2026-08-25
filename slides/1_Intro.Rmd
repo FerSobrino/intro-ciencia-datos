@@ -154,9 +154,10 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 
 ## RoadMap del curso
 
-- Semanas 1–4: Datos — `pandas`, datos limpios (tidy), EDA, **verificación de análisis con IA**
-- Semanas 5–6: Visualización — *Examen 1 (semana 6)*
-- Semanas 7–9: Aprendizaje supervisado — teoría, `sklearn`, métricas
+- Una sesión (larga) por semana; cada tarea se publica al cerrar su tema
+- Semanas 1–4: Datos — `pandas` (2 clases), datos limpios (tidy), **verificación de análisis con IA**
+- Semanas 5–6: EDA y visualización
+- Semanas 7–9: Aprendizaje supervisado — teoría, `sklearn`, métricas — *Examen 1 (semana 7)*
 - Semanas 10–11: Aprendizaje no supervisado (clustering) — *Examen 2 (semana 11)*
 - Semana 12: Defensas finales y flujo de trabajo con agentes
 

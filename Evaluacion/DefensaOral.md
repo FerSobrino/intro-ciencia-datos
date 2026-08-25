@@ -2,7 +2,7 @@
 
 **Peso:** 20% de la calificación final (dos defensas de 10% cada una).
 **Formato:** individual, 10 minutos, con tu notebook abierto. Sin IA.
-**Cuándo:** ronda 1 en semanas 4–6, ronda 2 en semanas 9–12; los
+**Cuándo:** ronda 1 en semanas 5–7, ronda 2 en semanas 9–12; los
 horarios se agendan en bloques al final de clase y en horas de oficina.
 
 ## Cómo funciona
