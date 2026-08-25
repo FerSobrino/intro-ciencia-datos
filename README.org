@@ -82,7 +82,7 @@ entendimiento./
 | Semana | Sesión 1                                       | Sesión 2                                 |
 |--------+------------------------------------------------+------------------------------------------|
 |      1 | Introducción y política de IA                  | Pandas I                                 |
-|      2 | Pandas II (*T1*)                               | Datos limpios (tidy) I                   |
+|      2 | Pandas II                                      | Datos limpios (tidy) I (*T1*)            |
 |      3 | Tidy II: joins (*T2*)                          | EDA I                                    |
 |      4 | Verificación de análisis con IA + *Crítica #1* | EDA II: valores faltantes (*T3*)         |
 |      5 | Visualización I                                | Visualización II (*T4*; defensas ronda 1) |
