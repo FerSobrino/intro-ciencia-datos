@@ -1,0 +1,104 @@
+---
+title: "Verificación de análisis hechos por IA"
+subtitle: "Introducción a la ciencia de datos"
+author: "Fernanda Sobrino"
+date: "2026"
+output:
+  beamer_presentation:
+    latex_engine: xelatex
+    slide_level: 2
+    includes:
+      in_header: tema_bugambilia.tex
+classoption: "aspectratio=169,12pt"
+lang: es
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
+
+# ¿Por qué esta clase?
+
+## El agente hace exactamente lo que le pides
+
+- Un agente de IA produce en 30 segundos un análisis que **corre sin errores** y **se ve profesional**
+- Ninguna de esas dos cosas implica que esté **bien**
+- Encuestas a desarrolladores (Stack Overflow 2025): 66% dice que las respuestas de IA están "casi bien, pero no del todo" — y ese *casi* es donde viven los errores caros
+- En política pública, un *casi bien* puede significar asignar mal un presupuesto o focalizar mal un programa
+
+## La evidencia sobre aprender con IA
+
+- Experimento aleatorizado con ~1,000 estudiantes (Bastani et al., 2025): acceso libre a GPT-4 → **+48% en las prácticas, −17% en el examen**
+- Estudios con novatos programando (Prather et al., 2024): quien no domina los fundamentos desarrolla una **ilusión de competencia** — completa la tarea sin entenderla
+- Moraleja del curso: la IA amplifica lo que ya sabes; no sustituye saberlo
+- Por eso: tareas con IA + transcripción, exámenes y defensas sin IA
+
+## No puedes verificar lo que no podrías haber escrito
+
+- Para auditar un `merge` necesitas saber qué puede salir mal en un `merge`
+- Para dudar de un accuracy de 97% necesitas saber qué es una clase desbalanceada
+- La fluidez con `pandas`/`sklearn` es el **piso** de la verificación, no un fin en sí mismo
+
+# El checklist de verificación
+
+## 1. Después de cada merge/join
+
+- **Cuenta renglones antes y después.** ¿Creció la tabla? ¿Por qué?
+- ¿La llave es única en la tabla que debería tenerla única?
+
+```python
+# antes del merge
+assert df.duplicated("llave").sum() == 0
+
+n_antes = len(izq)
+df = izq.merge(der, on="llave", how="left")
+assert len(df) == n_antes     # si no, hay duplicación
+```
+
+- Un merge con llave repetida **duplica renglones silenciosamente**
+
+## 2. Después de cada agregación
+
+- `groupby(...).mean()` **descarta NaN silenciosamente**: "el promedio de todos" quizá es "el promedio de los que sí tienen dato"
+- ¿Promedio de promedios o promedio global? No son lo mismo
+- Reconstruye **un** número por otro camino:
+
+```python
+total_a = df["monto"].sum()
+total_b = df.groupby("estado")["monto"].sum().sum()
+assert abs(total_a - total_b) < 1e-6
+```
+
+## 3. Antes de creer una gráfica
+
+- ¿El eje y empieza en cero? ¿Debería?
+- ¿Compara conteos absolutos entre grupos de tamaños distintos, cuando la pregunta es de tasas?
+- ¿El promedio resume bien, o la variable es sesgada y la mediana cuenta otra historia?
+- ¿La afirmación del texto coincide con lo que la gráfica *realmente* muestra?
+
+## 4. En un modelo (lo veremos a detalle)
+
+- ¿Se escaló/imputó **después** del split, solo con train?
+- ¿La métrica reportada es la correcta para el problema (no accuracy por default)?
+- ¿La evaluación es sobre datos que el modelo nunca vio?
+
+\vspace{0.5em}
+
+\begin{center}\textbf{Regla de oro: si el resultado es demasiado bueno,\\ sospecha primero de una fuga de datos, no de tu suerte}\end{center}
+
+## El reflejo profesional
+
+1. **Especifica antes de pedir**: qué datos, qué filtros, qué métrica, qué esperas ver
+2. **Verifica lo que llega**: checklist, no vibras
+3. **Documenta lo que encontraste**: en este curso, en la sección de *Verificación* de cada tarea
+4. En nuestra experiencia el agente **siempre** comete al menos un error o toma una decisión cuestionable — si no encontraste ninguno, di qué revisaste para descartarlos
+
+# Practiquemos
+
+## Crítica #1: hoy
+
+- En parejas: un análisis de puntualidad de vuelos escrito por un agente
+- Corre sin errores, tiene conclusiones claras — y entre 3 y 5 problemas plantados
+- Entregable: celda de hallazgos — dónde, por qué, evidencia, corrección
+- Recuerden: señalar algo que resultó no ser error **no resta** si viene con la verificación que lo descarta

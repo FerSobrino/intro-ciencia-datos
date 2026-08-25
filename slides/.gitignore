@@ -1,0 +1,10 @@
+# las slides rendereadas (pdf/html) sí se versionan, a pesar del *.pdf global
+!*.pdf
+# descarga accidental de chrome — borrar cuando se quiera
+chrome-headless-shell/
+# fuente comercial: mantener local, no subir
+*.OTF
+*.otf
+.Rhistory
+# el tema de las slides si se versiona
+!tema_bugambilia.tex

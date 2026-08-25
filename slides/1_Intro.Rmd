@@ -1,0 +1,210 @@
+---
+title: "Introducción a Ciencia de Datos"
+author: "Fernanda Sobrino"
+date: "2026"
+output:
+  beamer_presentation:
+    latex_engine: xelatex
+    slide_level: 2
+    includes:
+      in_header: tema_bugambilia.tex
+classoption: "aspectratio=169,12pt"
+lang: es
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
+
+# ¿Qué es ciencia de datos?
+
+## ¿Qué es ciencia de datos?
+
+- Usar datos para responder preguntas y tomar decisiones
+- No es (solo) programar: es formular la pregunta, conseguir y limpiar los datos, explorarlos, modelarlos y comunicar
+- Combina **ciencia**, el método científico tanto en el diseńo como en la implementación
+- Con **datos** que sirven para probar hipótesis. 
+- Un producto de datos no es solamente un modelo — es un sistema complejo:
+  **problema + modelo + tecnología**
+- Con tres etapas de vida: entrenamiento (creación) → prueba (validación) → producción (uso)
+
+## ¿Qué NO es ciencia de datos?
+
+- No es una tecnología, ni una herramienta
+- No es desarrollo de software
+- No es Business Intelligence
+- No es (únicamente) Big Data
+- No es (únicamente) Inteligencia Artificial
+- No es (únicamente) machine learning
+- No es (únicamente) visualización, ni (únicamente) hacer modelos
+
+\vspace{1em}
+\begin{center}... pero \textbf{utiliza todas} para entregar resultados\end{center}
+
+## Mito 1: "ML/IA es la única manera de resolver problemas"
+
+- Problemas determinísticos o con solución analítica pueden **no necesitar** un modelo de ML
+- Desarrollar modelos de ML es costoso en tiempo y recursos
+- Los modelos de ML dependen de datos abundantes y etiquetados
+- Elegir *no* usar ML también es una decisión de ciencia de datos
+
+## Mito 2: "ML/IA es agnóstico a los datos"
+
+- Los modelos absorben los **sesgos** presentes en los datos de entrenamiento — y los devuelven como predicciones sesgadas
+- La calidad del resultado depende de la calidad de la entrada: *garbage in, garbage out*
+
+## Mito 3: "ML/IA es independiente del contexto"
+
+- Interpretar resultados exige entender el problema **desde el origen de los datos**: cómo se generaron, su temporalidad, las interacciones entre variables
+- Las variables del modelo se eligen con cuidado y **de la mano de expertos en el contexto**
+
+# Ciencia de datos y política pública
+
+## ¿Por qué los gobiernos necesitan ciencia de datos?
+
+- Los gobiernos deciden con datos (o deberían): focalización de programas, inspecciones, presupuesto, evaluación
+- El riesgo nuevo no es la falta de análisis — es el **exceso de análisis automático sin verificación**
+- Un reporte generado por IA se ve profesional y puede parecerlo aunque esté mal; alguien tiene que auditarlo para asegurarse que funcione 
+- Ese alguien: ustedes
+
+## Cómo se formula un problema: 8 pasos
+
+- **I** Identificación del problema
+- **II** Formulación (*scoping*)
+- **III** Adquisición de datos
+- **IV** Exploración
+- **V** Formulación analítica
+- **VI** Análisis / modelado
+- **VII** Validación y prueba de campo
+- **VIII** Acción
+
+\footnotesize Fuente: *A Clinical Approach to Training Effective Data Scientists* (arxiv.org/pdf/1905.06875) \normalsize
+
+- **Esta será la parte más importante en políticas públicas**: un modelo perfecto de un problema mal formulado no sirve de nada
+
+## El scoping: 4 preguntas, en este orden
+
+1. **¿Cuáles son las metas del proyecto?** El paso más importante. La mayoría de las veces se empieza con una definición vaga; hay que volverla **concreta, medible y optimizable** — iterando y priorizando trade-offs
+2. **¿Qué acciones o intervenciones se van a mejorar?** Sin acciones concretas la solución no se implementa — y entonces **no es ciencia de datos**
+3. **¿Qué datos tenemos y cuáles necesitamos?** ¡De los datos no se habla sino hasta el paso 3! Primero el problema; si empiezas por los datos acabas con productos "muertos", no accionables
+4. **¿Qué análisis necesitamos?** Y cómo lo vamos a validar — incluida una prueba en campo antes del despliegue
+
+## Caso: envenenamiento por plomo (I–IV)
+
+- **Problema:** salud pública detecta tasas elevadas de plomo en sangre en infantes; hoy se actúa *después* de una prueba positiva. Meta: identificar hogares en riesgo **antes**
+- **Scoping:** sesión con oficiales de salud, médicos, inspectores y científicos de datos. Intervención concreta: inspeccionar hogares de alto riesgo con menores de 12 meses, de forma **equitativa** entre comunidades
+- **Datos:** pruebas de sangre, inspecciones, censo, programas de nutrición, geocodificación — entendiendo con los dueños cómo se generan
+- **Exploración:** los valores faltantes revelan un error de ETL; una caída en pruebas de hace 17 años marca hasta dónde sirve la historia
+
+## Caso: envenenamiento por plomo (V–VIII)
+
+- **Formulación analítica:** clasificación a nivel dirección, score mensual (el ciclo de planeación de inspecciones), cohorte de menores de 12 meses
+- **La métrica viene del problema:** precisión en las 250 direcciones que el departamento puede inspeccionar al mes + representación de comunidades vulnerables
+- **Modelado:** miles de configuraciones; gana un bosque aleatorio por precisión y equidad
+- **Prueba de campo:** un año, 50% de las direcciones inspeccionadas al azar — el modelo se confirma en el mundo real
+- **Acción:** el departamento lo pone en producción y compromete recursos para mantenerlo. Sin este paso, todo lo anterior fue un ejercicio académico
+
+## Formular bien es la habilidad clave — también con IA
+
+- En el ejemplo anterior el equipo decidio: la meta, la intervención, la unidad de análisis, la cohorte, la métrica, el criterio de equidad
+- Un agente de IA puede escribir todo el código de ese proyecto — pero no puede hacer el scoping por ti
+- La especificación que le das al agente son los pasos I–V; si están mal, el código funcionará... pero resolviendo el problema equivocado
+
+# Este curso
+
+## Este no es el típico curso de ML
+
+**Se deja en manos de los expertos...**
+
+- La teoría de los algoritmos y su construcción desde cero
+- Las suposiciones matemáticas finas y la modificación de algoritmos
+
+**Aquí se prioriza...**
+
+- Leer, manipular y entender bases de datos
+- Definir un proyecto de ciencia de datos y consumir modelos con criterio
+- Usar las herramientas modernas (incluidos los agentes de IA) sin perder el control
+- Desbloquear nuevas preguntas para resolver problemas reales
+
+## Objetivos de este curso
+
+1. Manipular y limpiar datos con `pandas` (el 80% del trabajo real)
+2. Explorar datos y comunicarlos con visualizaciones
+3. Entender y aplicar los modelos básicos de aprendizaje de máquina, supervisado y no supervisado
+4. Elegir la **métrica correcta** para un problema de política pública y defender la elección
+5. **Especificar y verificar** análisis hechos por agentes de IA: pedir bien y revisar con escepticismo
+
+## El elefante en el cuarto (el mundo)
+
+- Los agentes de IA ya escriben la mayor parte del código de análisis de datos
+- ¿Entonces por qué existe este curso? Porque el agente hace *"exactamente lo que le pides"*:
+  - si no sabes pedir o no sabes bien lo que quieres, no te lo va a dar
+  - si no sabes leer/interpretar lo que te regrese, no vas a notar cuando esté mal
+
+## La regla del curso
+
+\vspace{1em}
+\begin{center}\Large\textbf{El agente pone el código;\\ tú pones el entendimiento.}\end{center}
+\vspace{1em}
+
+- Seguimos programando en Python: no puedes verificar código que no podrías haber escrito
+- La IA se puede usar pero con transcripción obligatoria
+- Practicamos la crítica: 4 sesiones de encontrar los errores de un análisis hecho por IA
+
+## RoadMap del curso
+
+- Semanas 1–4: Datos — `pandas`, datos limpios (tidy), EDA, **verificación de análisis con IA**
+- Semanas 5–6: Visualización — *Examen 1 (semana 6)*
+- Semanas 7–9: Aprendizaje supervisado — teoría, `sklearn`, métricas
+- Semanas 10–11: Aprendizaje no supervisado (clustering) — *Examen 2 (semana 11)*
+- Semana 12: Defensas finales y flujo de trabajo con agentes
+
+## Evaluación
+
+| Componente | Peso |
+|---|---|
+| Tareas (8, IA permitida con transcripción; se elimina la más baja) | 25% |
+| Defensas orales (2 por estudiante, 10 min) | 20% |
+| Exámenes en clase (2, escritos, sin computadora) | 35% |
+| Ejercicios "Critica a la IA" (4, cuentan 3) | 15% |
+| Participación | 5% |
+
+- Temarios de exámenes en `Examenes/`; rúbricas en `Evaluacion/`
+
+## Política de IA
+
+- En **tareas**: cualquier LLM o agente permitido
+  - Transcripción íntegra obligatoria — sin ella, la tarea no se califica
+  - Toda tarea cierra con una sección de **Verificación**
+- En **exámenes y defensas**: sin IA
+  - Los exámenes no piden código: piden interpretar, diagnosticar, justificar
+  - En la defensa explicas *tu* tarea y la modificas en vivo
+- Eres responsable de todo lo que entregas: "lo escribió el agente" no es defensa
+
+## Defensas orales: qué esperar
+
+- Dos veces en el semestre, 10 minutos
+- Yo elijo cuál de tus tareas defiendes
+- Explicas tu código, justificas decisiones, haces una modificación pequeña en vivo
+- El mejor entrenamiento: antes de entregar, pregúntate *"¿puedo defender esto?"*
+
+## Herramientas
+
+- Python 3 + Jupyter notebooks
+- Puedes hacer todo en Google Colab si no quieres instalar nada 
+- `pandas`, `matplotlib`/`seaborn`, `scikit-learn`
+- git (al final del curso)
+- El LLM/agente de su elección — con las reglas del curso
+
+## Pregunta para pensar:
+
+-  ¿Qué análisis de datos has visto usarse (bien o mal) para justificar una decisión pública?
+
+
+## Recuerda:
+- Descarga la carpeta completa del curso: [github.com/FerSobrino/intro-ciencia-datos](https://github.com/FerSobrino/intro-ciencia-datos) (guía paso a paso: `tech-help/configuracion_entorno.md`)
+- Leer la política de IA — la vamos a discutir
+- Tener funcionando python en algún lado para poder seguir la clase (Colab cuenta — misma guía)
+
+

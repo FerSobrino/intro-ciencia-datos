@@ -1,0 +1,229 @@
+---
+title: "Datos limpios"
+subtitle: "Tidy data"
+author: "Fernanda Sobrino"
+date: "2026"
+output:
+  beamer_presentation:
+    latex_engine: xelatex
+    slide_level: 2
+    includes:
+      in_header: tema_bugambilia.tex
+classoption: "aspectratio=169,12pt"
+lang: es
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
+
+# ¿Por qué datos limpios?
+
+## Los datos nunca llegan listos
+
+- **Todos** los proyectos de ciencia de datos requieren limpiar los datos primero
+- Los datos de gobierno son el caso extremo: hechos para un trámite, no para un análisis
+- *Data tidying* = darle a la base una **estructura estándar** para poder analizarla
+- No es trabajo previo al análisis: es la parte del análisis donde se cometen los errores caros
+
+## Las tres reglas
+
+\begin{center}
+\includegraphics[width=0.66\textwidth]{../notebooks/imagenes/tidydata_1.jpeg}
+\end{center}
+
+\begin{center}\footnotesize Ilustraciones: Allison Horst\normalsize\end{center}
+
+## Cada base sucia es sucia a su manera
+
+\begin{center}
+\includegraphics[width=0.72\textwidth]{../notebooks/imagenes/tidydata_2.jpeg}
+\end{center}
+
+## Tidy = las mismas herramientas siempre
+
+\begin{center}
+\includegraphics[width=0.58\textwidth]{../notebooks/imagenes/tidydata_3.jpeg}
+\end{center}
+
+- Corolario: si para contestar tu pregunta tienes que "leer" el nombre de una columna, la base no está tidy
+- Y *tidy* depende de la pregunta: la misma tabla puede estar limpia para una cosa y sucia para otra
+
+## Cómo trabajaremos: estas slides son el mapa
+
+- **Estas slides son el resumen conceptual**: cómo se ve cada problema y qué operación lo resuelve
+- **Todo el código vive en el notebook**: `notebooks/Tidy.ipynb` — ahí se corre, se rompe y se verifica
+- El ritmo de la clase: reconocer el problema aquí → al notebook a arreglarlo → de regreso solo para el siguiente concepto
+- Para estudiar: el notebook es la referencia completa; estas slides son el repaso rápido de antes del examen
+
+# Los cuatro problemas
+
+## El mapa: síntoma, operación, verificación
+
+\vspace{0.4em}
+\footnotesize
+
+| Síntoma | Operación | Qué verificar después |
+|---|---|---|
+| Datos en el **nombre** de las columnas | `melt` (ancho → largo) | renglones nuevos = viejos × columnas apiladas |
+| Una observación en **varios renglones** | `pivot_table` (largo → ancho) | que el índice sea llave: si no, promedia solo |
+| Una celda con **dos datos** | `str.split` + `concat` | `dtypes`: las columnas nuevas nacen como texto |
+| Un dato en **varias columnas** | concatenar texto | ceros a la izquierda (`zfill`), tipo final |
+| Los datos en **varias tablas** | `merge` | `len()` antes y después |
+
+\normalsize
+
+- Reconocer el síntoma es el 90% del trabajo; la función es lo fácil
+
+## Problema 1: datos en el nombre de las columnas
+
+\begin{center}
+\includegraphics[width=0.90\textwidth]{../notebooks/imagenes/tidytable1a.png}
+\end{center}
+
+- `1999` y `2000` no son variables: son **valores** de la variable `year`
+- No puedes filtrar por año, ni graficar la serie, ni agrupar
+- La solución apila los encabezados en una columna nueva: **de ancho a largo** (`melt`)
+
+## Problema 2: una observación en varios renglones
+
+\begin{center}
+\includegraphics[width=0.72\textwidth]{../notebooks/imagenes/tidytable2a.png}
+\end{center}
+
+- `table2` tiene dos renglones por país-año: uno con `cases` y otro con `population`
+- Una columna `type` guarda **el nombre de la variable**, y `count` guarda su valor
+- No puedes calcular `cases / population`: están en renglones distintos
+- La solución es la inversa de la anterior: **de largo a ancho** (`pivot_table`)
+
+## Problema 3: una celda con dos datos
+
+\begin{center}
+\includegraphics[width=0.92\textwidth]{../notebooks/imagenes/table3a.png}
+\end{center}
+
+- `rate` contiene `"745/19987071"`: dos variables en una celda
+- Además es **texto**, no número: cualquier promedio va a fallar (o peor, va a concatenar)
+- La solución parte la celda en pedazos y los vuelve columnas (`str.split`)
+
+## Problema 4: un dato repartido en varias columnas
+
+\begin{center}
+\includegraphics[width=0.66\textwidth]{../notebooks/imagenes/table5.png}
+\end{center}
+
+- `century` = 19 y `year` = 99 son pedazos de un solo dato: 1999
+- Es el problema 3 al revés: aquí hay que **pegar**, no partir
+- Y hay que pegar con cuidado: el año `05` no puede volverse `5`
+
+## Trampas de la limpieza
+
+1. **`pivot_table` agrega en silencio.** Su default es `aggfunc='mean'`: si el índice no es único, promedia y no te dice nada. Si esperas una tabla exacta, verifica primero que el índice sea llave
+2. **Todo lo que sale de texto, nace texto.** Después de partir una celda, las columnas nuevas son `object`. Un "promedio" de texto no truena: concatena
+3. **`str.split` no se queja.** Si un renglón tiene tres pedazos y otro ninguno, rellena con `None` y sigue. Los faltantes nuevos aparecen sin aviso
+4. **Limpiar cambia el conteo de renglones**, y eso es lo que hay que auditar: antes y después de cada operación, cuenta
+
+- Regla transversal: `pandas` no modifica en su lugar — si no asignaste el resultado, no pasó nada
+
+# Unir tablas: joins
+
+## Los datos viven en varias tablas
+
+- En `flights` la información está repartida a propósito:
+  - `flights`: un renglón por vuelo
+  - `planes`: un renglón por avión
+  - `weather`: un renglón por fecha-hora
+- **Llave primaria**: identifica de forma única una observación **en su propia tabla**
+- **Llave foránea**: identifica de forma única una observación **en otra tabla**
+- Relaciones posibles: una a una, muchas a una, una a muchas, **muchas a muchas**
+- La mayoría de las bases no te dicen cuál es su llave: hay que encontrarla y **probar** que lo es
+
+## Los seis joins, en imagen
+
+\vspace{0.2em}
+
+\begin{center}
+\includegraphics[width=0.27\textwidth]{../notebooks/imagenes/inner_join.png}\hspace{0.6em}
+\includegraphics[width=0.27\textwidth]{../notebooks/imagenes/left_join.png}\hspace{0.6em}
+\includegraphics[width=0.27\textwidth]{../notebooks/imagenes/right_join.png}
+\end{center}
+
+\vspace{0.2em}
+
+\begin{center}
+\includegraphics[width=0.27\textwidth]{../notebooks/imagenes/full_join.png}\hspace{0.6em}
+\includegraphics[width=0.27\textwidth]{../notebooks/imagenes/semi_join.png}\hspace{0.6em}
+\includegraphics[width=0.27\textwidth]{../notebooks/imagenes/anti_join.png}
+\end{center}
+
+\vspace{0.2em}
+
+\footnotesize Arriba: `inner`, `left`, `right`. Abajo: `outer` (full), `semi`, `anti`.\normalsize
+
+## Resumen: los seis joins
+
+\vspace{0.3em}
+\scriptsize
+
+| Join | Qué conserva | Para qué |
+|---|---|---|
+| `inner` | lo que está en **ambas** | borra datos en silencio |
+| `left` | todo `x`, más el match de `y` | "mi tabla, enriquecida" |
+| `right` | todo `y`, más el match de `x` | un `left` al revés |
+| `outer` | todo de ambas | `NaN` de los dos lados |
+| `semi` | renglones de `x` **con** match | diagnóstico |
+| `anti` | renglones de `x` **sin** match | qué se te va a perder |
+
+\normalsize
+
+- **Usa**: `left` e `inner`. **Con cuidado**: `right` y `outer`. **Para diagnosticar**: `semi` y `anti`
+- `merge` une por **columnas** (default `inner`); `join` por **índices** (default `left`)
+- Escribe siempre `on=` y `how=` — **nunca los dejes al default**
+
+## PELIGRO: la llave repetida duplica renglones
+
+- Si la llave **no es única** en la tabla derecha, `merge` hace el producto: cada renglón izquierdo se repite una vez por cada match
+- 100 vuelos × 3 registros de clima repetidos para esa hora = **300 renglones**
+- Nadie lanza un error. La tabla simplemente crece
+- Y después: cada promedio, cada suma, cada conteo queda **inflado** — y la conclusión de política pública se construye sobre esa inflación
+- Es el error que buscamos en la **Crítica #1** y en la **Tarea 3**
+
+\vspace{0.3em}
+
+\begin{center}\textbf{El chequeo obligatorio: llave única antes, conteo de renglones después, e \texttt{indicator=True} para saber cuántos quedaron huérfanos.}\end{center}
+
+# Valores faltantes
+
+## Explícitos e implícitos
+
+- **Explícito**: la celda existe y dice `NaN` — lo ves
+- **Implícito**: la observación **no existe como renglón** — no lo ves
+  - si `stocks` no tiene el 1er trimestre de 2016, ningún `isnull()` te lo va a decir
+- Limpiar la base cambia cuáles son cuáles: `pivot_table` vuelve explícitos los implícitos
+- Para encontrar los implícitos hay una sola receta, y es un join:
+  1. Construye la base **completa** con todas las combinaciones del identificador
+  2. Únela con la original (`left`) y cuenta la diferencia de renglones
+  3. Esa diferencia son las observaciones que nunca supiste que faltaban
+- Pregunta de política pública: ¿la base tiene **todos** los municipios y todos los meses, o solo los que reportaron?
+
+# Al notebook
+
+## Lo que vamos a hacer en `Tidy.ipynb`
+
+1. **Los cuatro problemas**, uno por uno, con las tablas de ejemplo: `melt`, `pivot_table`, `str.split` + `concat`, y concatenar columnas
+2. **Llaves**: encontrar la llave primaria de `planes` y `weather`, y qué hacer cuando no hay
+3. **Los seis joins** sobre tablas chiquitas de goles y asistencias, donde sí se puede contar a mano lo que pasa
+4. **El chequeo de todo `merge`**: `duplicated`, `len()` antes/después, `indicator=True`
+5. **Faltantes explícitos e implícitos** y cómo encontrar los que no se ven
+
+- Los **ejercicios en clase** están marcados en el notebook — se hacen ahí, en el momento
+
+## Qué verificar cuando el agente hace esto
+
+- **Después de cada `melt` o `pivot_table`**: cuenta renglones y celdas. ¿Se perdió información? ¿`pivot_table` promedió en silencio porque el índice no era único?
+- **Después de cada `str.split`**: revisa `dtypes`. Las columnas nuevas nacen como texto, y un "promedio" de texto no truena, concatena
+- **Antes de cada `merge`**: exige la prueba de que la llave es única en la tabla derecha (`duplicated(llave).sum() == 0`)
+- **Después de cada `merge`**: compara `len()` antes y después. Si creció, hay duplicación de renglones y **todos los agregados posteriores están inflados**
+- **Pide el `indicator=True`**: cuántos renglones no hicieron match, y si el agente decidió tirarlos (`inner`) sin decírtelo
+- **Pregunta por los faltantes implícitos**: ¿la base tiene todos los periodos y todas las unidades, o solo las que reportaron?

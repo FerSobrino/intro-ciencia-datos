@@ -1,0 +1,157 @@
+% ============================================================
+% Tema "Bugambilia" — adaptado del estilo de las slides de
+% Satanic Panic (sin pentagramas, rojo -> rosa bugambilia).
+% Se usa como includes/in_header desde beamer_presentation (xelatex).
+% ============================================================
+\usepackage{fontspec}
+\setsansfont{texgyreheros-regular.otf}[
+  Ligatures = TeX,
+  BoldFont = texgyreheros-bold.otf,
+  ItalicFont = texgyreheros-italic.otf,
+  BoldItalicFont = texgyreheros-bolditalic.otf,
+  Path = /usr/local/texlive/2024/texmf-dist/fonts/opentype/public/tex-gyre/
+]
+\setmainfont{texgyreheros-regular.otf}[
+  Ligatures = TeX,
+  BoldFont = texgyreheros-bold.otf,
+  ItalicFont = texgyreheros-italic.otf,
+  BoldItalicFont = texgyreheros-bolditalic.otf,
+  Path = /usr/local/texlive/2024/texmf-dist/fonts/opentype/public/tex-gyre/
+]
+\renewcommand{\familydefault}{\sfdefault}
+
+\IfFontExistsTF{ITCBenguiatStdBoldCn.OTF}{
+  \newfontfamily\titlefont[
+    Path=./,
+    UprightFont = {*},
+    LetterSpace = 4,
+    Ligatures = TeX
+  ]{ITCBenguiatStdBoldCn.OTF}
+}{
+  \newfontfamily\titlefont[
+    LetterSpace = 3,
+    Ligatures = TeX
+  ]{TeX Gyre Pagella Bold}
+}
+
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{array}
+
+% ============================================================
+% COLORES
+% ============================================================
+\definecolor{BgBlack}{HTML}{0A0A0A}
+\definecolor{BgPink}{HTML}{C2185B}
+\definecolor{BgPinkBright}{HTML}{EC5F9C}
+\definecolor{BgGray}{HTML}{888888}
+\definecolor{BgWhite}{HTML}{E8E8E8}
+\definecolor{BgDimPink}{HTML}{4D0A26}
+
+% ============================================================
+% TEMA
+% ============================================================
+\setbeamertemplate{navigation symbols}{}
+
+\setbeamertemplate{itemize item}{\textcolor{BgPink}{\small$\blacktriangleright$}}
+\setbeamertemplate{itemize subitem}{\textcolor{BgPinkBright}{\small$\triangleright$}}
+\setbeamertemplate{itemize subsubitem}{\textcolor{BgGray}{\tiny$\bullet$}}
+
+% estilo blanco (default de todas las láminas)
+\setbeamercolor{normal text}{fg=black, bg=white}
+\setbeamercolor{background canvas}{bg=white}
+\setbeamercolor{frametitle}{fg=BgPink, bg=white}
+\setbeamercolor{title}{fg=BgPink, bg=white}
+\setbeamercolor{subtitle}{fg=black, bg=white}
+\setbeamercolor{author}{fg=black, bg=white}
+\setbeamercolor{date}{fg=black, bg=white}
+\setbeamercolor{institute}{fg=black, bg=white}
+\setbeamercolor{itemize item}{fg=BgPink}
+\setbeamercolor{itemize subitem}{fg=BgPink}
+\setbeamercolor{itemize subsubitem}{fg=black}
+\setbeamercolor{enumerate item}{fg=BgPink}
+\setbeamercolor{enumerate subitem}{fg=BgPink}
+\setbeamercolor{block title}{fg=white, bg=BgPink}
+\setbeamercolor{block body}{fg=black, bg=BgPink!8}
+\setbeamercolor{block title alerted}{fg=white, bg=BgPink}
+\setbeamercolor{block body alerted}{fg=black, bg=BgPink!10}
+\setbeamercolor{section in toc}{fg=BgPink}
+\setbeamercolor{footline}{fg=BgGray, bg=white}
+
+% ============================================================
+% FRAMETITLE
+% ============================================================
+\makeatletter
+\setbeamertemplate{frametitle}{%
+  \vspace{0.35em}%
+  {\Large\titlefont\color{BgPink}\insertframetitle}%
+  \ifx\insertframesubtitle\@empty\else
+    \par{\small\color{BgGray}\insertframesubtitle}%
+  \fi
+  \par\vspace{0.15em}%
+  {\color{BgPink!60}\rule{\textwidth}{0.5pt}}%
+  \vspace{-0.25em}%
+}
+\makeatother
+
+% ============================================================
+% FOOTLINE
+% ============================================================
+\setbeamertemplate{footline}{%
+  \hfill
+  {\usebeamercolor[fg]{footline}\scriptsize\insertframenumber\,/\,\inserttotalframenumber}%
+  \hspace{1.2em}\vspace{0.6em}%
+}
+
+% ============================================================
+% HELPERS
+% ============================================================
+\newcommand{\pinkrule}{\par\vspace{0.3em}{\color{BgDimPink}\rule{\textwidth}{0.4pt}}\par\vspace{0.2em}}
+
+% ============================================================
+% PORTADA (fondo negro, título en bugambilia — sin pentagramas)
+% ============================================================
+\makeatletter
+\setbeamertemplate{title page}{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \fill[BgBlack] (current page.south west) rectangle (current page.north east);
+    \draw[BgPink!70, line width=0.6pt]
+      ([xshift=0.9cm, yshift=-0.9cm]current page.north west) --
+      ([xshift=-0.9cm, yshift=-0.9cm]current page.north east);
+    \draw[BgDimPink, line width=0.6pt]
+      ([xshift=0.9cm, yshift=0.9cm]current page.south west) --
+      ([xshift=-0.9cm, yshift=0.9cm]current page.south east);
+  \end{tikzpicture}%
+  \vspace{1.5cm}
+  \begin{center}
+    {\fontsize{26}{36}\selectfont\titlefont\color{BgPink}\MakeUppercase{\inserttitle}}\\[8pt]
+    \ifx\insertsubtitle\@empty\else
+      {\fontsize{11}{14}\selectfont\color{BgWhite}\insertsubtitle}\\[12pt]
+    \fi
+    {\color{BgDimPink}\rule{0.52\textwidth}{0.45pt}}\\[10pt]
+    {\small\color{BgGray}\insertauthor}\\[2pt]
+    {\small\color{BgGray}\insertdate}
+  \end{center}
+}
+\makeatother
+
+% ============================================================
+% PÁGINAS DE SECCIÓN (# nivel 1): fondo negro, texto bugambilia
+% ============================================================
+\setbeamertemplate{section page}{%
+  \begin{tikzpicture}[remember picture, overlay]
+    \fill[BgBlack] (current page.south west) rectangle (current page.north east);
+  \end{tikzpicture}%
+  \vfill
+  \begin{center}
+    {\fontsize{22}{28}\selectfont\titlefont\color{BgPink}\insertsection}\\[10pt]
+    {\color{BgDimPink}\rule{0.4\textwidth}{0.45pt}}
+  \end{center}
+  \vfill
+}
+\AtBeginSection[]{
+  {\setbeamertemplate{footline}{}
+   \begin{frame}[plain]\sectionpage\end{frame}}
+}

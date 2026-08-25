@@ -162,3 +162,20 @@ ltximg/
 
 # variables de ambiente secretas
 .secrets
+
+# claves de las sesiones Critica a la IA (solo instructora)
+criticas/claves/
+
+# datos grandes descargados on-demand
+notebooks/nyc_taxi_wide.parq
+*.parq
+
+# artefactos locales
+.ipynb_checkpoints/
+scratch_extract/
+notebooks/nci.micro.data.pkl
+REDISENO_NOTAS.md
+
+# el pdf de la política sí se versiona
+!PoliticaIA.pdf
+!tech-help/*.pdf

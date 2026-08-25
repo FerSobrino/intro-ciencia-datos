@@ -1,0 +1,308 @@
+---
+title: "Aprendizaje no supervisado: clustering"
+subtitle: "Introducción a la ciencia de datos"
+author: "Fernanda Sobrino"
+date: "2026"
+output:
+  beamer_presentation:
+    latex_engine: xelatex
+    slide_level: 2
+    includes:
+      in_header: tema_bugambilia.tex
+classoption: "aspectratio=169,12pt"
+lang: es
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
+
+# Aprendizaje no supervisado
+
+## De supervisado a no supervisado
+
+\begin{center}
+\includegraphics[width=0.60\textwidth,height=0.36\textheight,keepaspectratio]{../images/types-of-learning.png}
+\end{center}
+
+- Supervisado: teníamos pares $(X, y)$ y aprendíamos $f$ tal que $f(X) \approx y$
+- No supervisado: **solo tenemos $X$**. No hay etiqueta, no hay respuesta correcta
+- Y por lo tanto: **no hay conjunto de prueba**. No podemos medir "qué tan bien le atinamos"
+- Familias: agrupamiento, detección de anomalías, reducción de dimensionalidad (PCA)
+
+## Qué es agrupar (clustering)
+
+- **Análisis de agrupamiento**: partir un conjunto de observaciones en subconjuntos (grupos o *clusters*)
+- Dos condiciones:
+  - los datos de un mismo grupo deben **parecerse entre sí**
+  - los datos de grupos distintos deben ser **diferentes**
+- Usos típicos: segmentación de beneficiarios, zonas de alta demanda, tipologías de municipios, detección de fraude
+- La pregunta incómoda desde el minuto uno: *¿parecerse en qué?*
+
+## Cómo trabajaremos: estas slides son el mapa
+
+- **Estas slides son el resumen conceptual**; todo el código se ve, se corre y se rompe en vivo en los notebooks
+- Esta clase se acompaña de **dos notebooks**, en este orden:
+  - `notebooks/Clustering_K-means_Hierarchical.ipynb` (blobs sintéticos, microarrays de tumores)
+  - `notebooks/Clustering_DBSCAN.ipynb` (medias lunas, viajes en taxi de Nueva York)
+- El ritmo de la clase: una idea aquí → al notebook a hacerla → de regreso solo para el siguiente concepto
+- Para estudiar: los notebooks son la referencia completa; estas slides son el repaso rápido de antes del examen
+
+## Distancias: qué significa "parecido"
+
+\begin{center}
+\includegraphics[width=0.62\textwidth]{../images/euclidean.png}\\[0.5em]
+\includegraphics[width=0.62\textwidth]{../images/manhattan.png}
+\end{center}
+
+- **Euclidiana**: la línea recta. El default de casi todo
+- **Manhattan**: como caminar por una ciudad cuadriculada; menos sensible a valores extremos
+- **Coseno**: mide dirección, no magnitud (texto). **Jaccard**: para conjuntos y variables binarias
+- Cambiar la distancia cambia los grupos. No es un detalle técnico: es una **decisión sustantiva**
+
+## Escalar aquí no es opcional
+
+\begin{center}
+\includegraphics[width=0.28\textwidth,height=0.30\textheight,keepaspectratio]{../images/escalamiento.png}
+\hspace{2em}
+\includegraphics[width=0.28\textwidth,height=0.30\textheight,keepaspectratio]{../images/normalizacion.png}
+\end{center}
+
+- En supervisado, escalar era necesario para *algunos* modelos. En clustering **todo** se basa en distancias
+- Si mezclas "población" (millones) con "tasa de pobreza" (0–1), la población es la única variable que existe
+- No hay train/test: se escala con **todos** los datos, y hay que documentarlo
+- Cuidado adicional: escalar mete a los outliers al mismo rango, no los elimina
+
+# K-means
+
+## El algoritmo
+
+\begin{center}
+\includegraphics[width=0.34\textwidth,height=0.34\textheight,keepaspectratio]{../images/k_means_1.png}
+\hspace{2em}
+\includegraphics[width=0.30\textwidth,height=0.34\textheight,keepaspectratio]{../images/k_means_2.png}
+\end{center}
+
+1. Eliges $k$ y colocas $k$ centroides iniciales
+2. **Asignas** cada punto al centroide más cercano
+3. **Mueves** cada centroide al promedio de los puntos que le tocaron
+4. Repites 2 y 3 hasta que nada cambia
+
+- El centroide representa al grupo: es su punto promedio (puede no ser una observación real)
+
+## Inicialización: por qué importa
+
+- K-means minimiza la **inercia** (suma de distancias al cuadrado a su centroide), pero solo garantiza un **mínimo local**
+- Con centroides iniciales malos, converge a una partición mala y se ve perfectamente razonable
+- `k-means++` elige centroides iniciales alejados entre sí, con probabilidad proporcional a la distancia al cuadrado
+- También se controla cuántas veces repetir el algoritmo con distintos arranques: se queda con la de menor inercia
+- Sin fijar la semilla, **dos corridas dan grupos distintos** — y los números del reporte cambian
+
+## ¿Cuántos grupos? El codo
+
+- La inercia **siempre** baja al aumentar $k$ (con $k = n$ vale cero): no se puede "maximizar"
+- Se corre K-means para $k = 1, 2, \ldots, 10$ y se grafica la inercia contra $k$
+- Buscamos el punto donde deja de bajar rápido: el **codo**
+- Problema honesto: muchas veces **no hay codo**. En el ejemplo de tumores no lo había y se eligió $k=3$ por criterio experto
+- El codo sugiere, no decide
+
+## ¿Cuántos grupos? La silueta
+
+\begin{center}
+\includegraphics[width=0.42\textwidth,height=0.42\textheight,keepaspectratio]{../images/silhouette_coef.png}
+\end{center}
+
+## ¿Cuántos grupos? La silueta (cont.)
+
+- Para cada punto: $a$ = distancia media a los de su grupo, $b$ = distancia media al grupo vecino más cercano
+- Va de $-1$ a $+1$: cerca de 1 está bien acomodado, cerca de 0 está en la frontera, negativo probablemente está en el grupo equivocado
+- La **silueta promedio** resume todo en un número, y por eso es peligrosa
+- Un promedio alto puede esconder un grupo entero con silueta negativa: mira el **diagrama** de silueta, no solo el número
+
+## K-means supone grupos esféricos
+
+\begin{center}
+\includegraphics[width=0.32\textwidth,height=0.34\textheight,keepaspectratio]{../images/kmeans_not_working_data.png}
+\hspace{1.5em}
+\includegraphics[width=0.32\textwidth,height=0.34\textheight,keepaspectratio]{../images/kmeans_not_working.png}
+\end{center}
+
+- K-means busca grupos **redondos y de tamaño parecido**, porque solo usa distancia al centroide
+- Con grupos alargados, anidados o de densidades muy distintas, parte los datos donde no hay corte
+- Y lo hace sin quejarse: la inercia baja igual y la gráfica se ve limpia
+- La inercia más baja **no** es el mejor agrupamiento
+
+# Clustering jerárquico
+
+## Aglomerativo: la idea
+
+- No eliges $k$ de entrada: construyes una **jerarquía completa** de agrupamientos
+- Aglomerativo (de abajo hacia arriba):
+  1. Cada observación es su propio grupo
+  2. Se fusionan los **dos grupos más cercanos**
+  3. Se repite hasta que queda un solo grupo
+- Ventaja sobre K-means: los grupos quedan **anidados** — con 4 grupos no se rompe la estructura de 3
+- Además da un orden parcial de las observaciones, útil para interpretar
+
+## Linkage: distancia entre grupos
+
+- El algoritmo necesita una distancia entre *grupos*, no entre puntos. Esa regla es el **linkage**:
+- **Single**: distancia entre los dos puntos más cercanos → grupos largos y encadenados
+- **Complete**: entre los dos más lejanos → grupos compactos
+- **Average**: promedio de todos los pares → intermedio, suele ser el más estable
+- **Ward**: minimiza el aumento de varianza dentro del grupo (parecido en espíritu a K-means)
+- El `linkage` cambia el resultado tanto como cambiar de algoritmo — es una decisión, no un default
+
+## El dendrograma
+
+- El resultado del algoritmo es una **matriz de fusiones**: cada renglón dice qué dos grupos se unieron, a qué distancia, y de qué tamaño quedó el grupo nuevo
+- El dendrograma es el dibujo de esa matriz
+- La **altura** de cada rama es la distancia a la que se fusionaron: ramas altas = grupos muy distintos
+- Los índices mayores al número de observaciones se refieren a grupos creados en pasos anteriores
+
+## El dendrograma (cont.)
+
+- **Correlación cofenética**: qué tanto las distancias del dendrograma reproducen las distancias reales
+  - cerca de 1, el árbol es fiel; baja, el dibujo está deformando los datos
+- En el ejemplo de tumores, *average* dio la cofenética más alta y *single* produjo grupos encadenados inútiles
+- Sirve para **elegir el linkage**: no es un número decorativo
+
+## Cortar el árbol
+
+- Cortar horizontal el dendrograma a una altura da una partición concreta
+- Se puede cortar a una **altura** (una distancia) o pidiendo directamente un **número de grupos**
+- Cortar más abajo = más grupos, más chicos
+- **Ojo**: el dendrograma no dice dónde cortar. Elegir la altura es la misma decisión que elegir $k$, solo que ahora se ve como un dibujo elegante
+
+# DBSCAN
+
+## Densidad: núcleo, frontera y ruido
+
+- Idea distinta: un grupo es una **región densa** de puntos, sin importar su forma
+- Dos parámetros: `eps` (radio del vecindario) y `min_samples` (mínimo de vecinos, *minpts*)
+- Tres tipos de punto:
+  - **núcleo (core)**: tiene al menos `min_samples` vecinos dentro de `eps`
+  - **frontera**: está dentro del radio de un núcleo, pero no tiene suficientes vecinos propios
+  - **ruido**: ni una cosa ni la otra — etiqueta $-1$
+- Lo importante: **DBSCAN no obliga a que todo punto pertenezca a un grupo**
+
+## Qué gana y qué pierde DBSCAN
+
+- **No** hay que decirle cuántos grupos: los descubre (y descubre cuántos hay)
+- Encuentra grupos de forma arbitraria — medias lunas, anillos, calles
+- Es el único de los tres que puede decir "esto no pertenece a ningún grupo": la etiqueta $-1$ es información, no un error
+- Lo que pierde: no tiene forma de asignar un punto nuevo. Para eso se entrena un clasificador (por ejemplo KNN) sobre los puntos núcleo
+- Y hereda el problema de siempre: los dos parámetros los eliges tú
+
+## Elegir eps y minpts
+
+- Todo el resultado depende de estos dos números, y no hay un método automático
+- Con `eps` muy chico, casi todo es ruido; con `eps` muy grande, todo es un solo grupo
+- La forma honesta es **razonar la densidad del dominio**: en el ejemplo de taxis de NY, se estimó la densidad promedio de viajes en Manhattan (60 km²), se fijó como objetivo 10× esa densidad y de ahí salió `minpts = densidad × área(eps)`
+- **HDBSCAN** generaliza DBSCAN: encuentra grupos de **densidades distintas** en los mismos datos y evita fijar un solo `eps`
+
+# Mapa y trampas
+
+## El mapa: algoritmo, cuándo usarlo, qué revisar
+
+\vspace{0.3em}
+
+\footnotesize
+
+| Algoritmo | Cuándo usarlo | Qué revisar siempre |
+|---|---|---|
+| K-means | grupos redondos, muchos datos, $k$ razonable de antemano | semilla, número de arranques, codo **y** silueta |
+| Jerárquico | pocos datos, quiero ver la estructura anidada | el linkage elegido y la correlación cofenética |
+| DBSCAN | formas raras, hay ruido de verdad, no sé cuántos grupos hay | `eps`, `minpts` y **qué porcentaje quedó como ruido** |
+
+\normalsize
+
+\vspace{0.5em}
+
+- Los tres necesitan escalar antes. Los tres devuelven grupos aunque no los haya
+- Ninguno de los tres tiene un conjunto de prueba: la validación es sustantiva, no estadística
+
+## Tres trampas (las veremos en vivo en los notebooks)
+
+1. **El promedio esconde el desastre:** una silueta promedio decente puede convivir con un grupo entero de silueta negativa. Solo el diagrama por observación lo enseña — el número solo, no
+2. **La distancia se calcula en las unidades equivocadas:** en el ejemplo de taxis, las coordenadas vienen en Web Mercator, donde un "metro" no mide lo mismo en toda la ciudad. Hay que reproyectar **antes** de medir, o `eps` no significa nada
+3. **El linkage bonito y el linkage útil no son el mismo:** *single linkage* produce dendrogramas espectaculares y grupos encadenados inservibles. La cofenética es la que decide, no el dibujo
+
+- Regla transversal: si no fijaste la semilla, el reporte no es reproducible — y los grupos del jueves no son los del martes
+
+# Al notebook
+
+## Lo que vamos a hacer en `Clustering_K-means_Hierarchical.ipynb`
+
+1. **Demostración de K-means** sobre blobs sintéticos: centroides, asignación, predecir observaciones nuevas
+2. **Distancia a los centroides** como "soft clustering": qué tan seguro está el algoritmo
+3. **Inicialización**: comparar arranques aleatorios contra `k-means++` y ver cómo cambia el resultado
+4. **Elegir $k$**: la curva de inercia (el codo) y el diagrama de silueta, lado a lado
+5. **Cuando K-means falla**: grupos alargados y de densidades distintas
+6. **Caso aplicado — microarrays de tumores**: K-means como línea base, comparar los cuatro linkages, leer la matriz de fusiones, la correlación cofenética, el dendrograma y el corte
+
+- Los **ejercicios están marcados en el notebook** — se hacen ahí, en el momento
+
+## Lo que vamos a hacer en `Clustering_DBSCAN.ipynb`
+
+1. **Demostración de DBSCAN** sobre medias lunas: núcleo, frontera y ruido
+2. **El efecto de `eps`**: la misma base con `eps=0.05` y con `eps=0.2`, y por qué una funciona
+3. **Predecir puntos nuevos** entrenando un KNN sobre los puntos núcleo
+4. **Caso aplicado — taxis de NY**: 12 millones de viajes, explorar la demanda por hora y visualizar densidad
+5. **Proyecciones**: por qué Web Mercator no sirve para medir distancias y cómo reproyectar a UTM
+6. **Razonar `eps` y `minpts`** desde la densidad del dominio, correr DBSCAN y mapear los hotspots
+
+- Los **ejercicios están marcados en el notebook** — se hacen ahí, en el momento
+
+# ¿Son reales los grupos?
+
+## Cuándo falla cada uno
+
+| Algoritmo | Supone | Falla cuando |
+|---|---|---|
+| K-means | grupos esféricos, tamaño similar | formas alargadas, densidades distintas, outliers |
+| Jerárquico | que la jerarquía existe | datos grandes (costoso); *single linkage* encadena |
+| DBSCAN | densidad uniforme | densidades muy distintas; `eps` mal elegido |
+
+\vspace{0.5em}
+
+- Todos sufren con **muchas dimensiones**: ahí todas las distancias se parecen entre sí y "cercano" pierde significado
+- Ninguno tiene manera interna de decirte que se equivocó
+
+## El algoritmo **siempre** devuelve grupos
+
+- Dale ruido puro a K-means con $k=4$ y te va a entregar cuatro grupos, con sus centroides y su gráfica de colores
+- No existe la salida "aquí no hay estructura" (DBSCAN es la única excepción parcial: puede declarar todo ruido)
+- Cómo distinguir estructura real de partición arbitraria:
+  - ¿La silueta es decente, o apenas arriba de 0?
+  - ¿Los grupos **sobreviven** al cambiar semilla, escalamiento, algoritmo o quitar una variable?
+  - ¿Se distinguen en variables que **no** usaste para agrupar?
+  - ¿Alguien que conoce el tema los reconoce y les puede poner nombre?
+
+## El riesgo de política pública
+
+- Escenario real: agrupar municipios y **asignar fondos por grupo**
+- Si los grupos no son reales, acabas dando tratamientos distintos a municipios idénticos, con una justificación técnica impecable
+- Un cluster **no es** una categoría del mundo: es el resultado de tus decisiones de distancia, escala y $k$
+
+## El riesgo de política pública (cont.)
+
+Agravantes típicos:
+
+- La frontera entre grupos es arbitraria, pero el presupuesto es discreto: dos municipios casi idénticos caen de lados distintos
+- Los grupos reproducen la variable que dominó la distancia (casi siempre, tamaño de población)
+- Se les pone nombre — "municipios rezagados" — y el nombre se vuelve real aunque el grupo no lo sea
+
+## Qué verificar cuando el agente hace esto
+
+1. **¿Escaló antes de calcular distancias?** Sin escalar, el agrupamiento es de la variable con los números más grandes
+2. **¿Fijó `random_state` y reportó `n_init`?** Si no, los grupos cambian entre corridas y el reporte no es reproducible
+3. **¿De dónde salió $k$?** Pide el codo *y* la silueta, y que diga qué tan claro fue — "elegí k=4" sin evidencia no vale
+4. **¿Probó estabilidad?** Otra semilla, otro algoritmo, quitar una variable: si los grupos se deshacen, no existen
+
+## Qué verificar cuando el agente hace esto (cont.)
+
+5. **¿Perfiló los grupos?** Medias por grupo y tamaño de cada uno; un grupo con 3 observaciones no es un segmento
+6. **¿Le puso nombres?** Ojo con las etiquetas interpretativas que el agente inventa — verifica que el perfil numérico las respalde
+7. **¿Con DBSCAN, cuánto quedó como ruido?** Si es 60% de los datos, `eps` está mal, no es que los datos sean raros
