@@ -60,15 +60,15 @@ entendimiento.*
 | Semana | Temas | Tareas | Exámenes | Defensas |
 |---|---|---|---|---|
 | 1 | Introducción y política de IA · Pandas I (entorno, leer y explorar datos) | | | |
-| 2 | Pandas II: filtros, faltantes, groupby y pipes · Tidy I: los 4 patrones sucios | se publica T1 | | |
-| 3 | Tidy II: joins · Verificación de análisis con IA | entrega T1 · se publica T2 | | |
-| 4 | **Crítica #1** · EDA I | entrega T2 · se publica T3 | | se agenda ronda 1 |
-| 5 | EDA II · Visualización I | entrega T3 · se publica T4 | | ronda 1 |
-| 6 | Visualización II: gráficas que engañan · **Crítica #2** | entrega T4 · se publica T5 | | ronda 1 |
-| 7 | ML Teoría I: modelos y train/test | entrega T5 · se publica T6 | **Examen 1** | ronda 1 |
-| 8 | ML Teoría II y III: clasificación y métricas de desempeño | entrega T6 · se publica T7 (dos semanas) | | |
+| 2 | Pandas II: filtros, faltantes, groupby y pipes · Tidy I: los 4 patrones sucios |  | | |
+| 3 | Tidy II: joins · Verificación de análisis con IA | entrega T1  | | |
+| 4 | **Crítica #1** · EDA I | entrega T2  | | |
+| 5 | EDA II · Visualización I | entrega T3  | | ronda 1 |
+| 6 | Visualización II: gráficas que engañan · **Crítica #2** | entrega T4 | | ronda 1 |
+| 7 | ML Teoría I: modelos y train/test | entrega T5 | **Examen 1** | ronda 1 |
+| 8 | ML Teoría II y III: clasificación y métricas de desempeño | entrega T6 | | |
 | 9 | Aprendizaje supervisado en sklearn · **Crítica #3** | | | ronda 2 |
-| 10 | Clustering: K-means, jerárquico y DBSCAN | entrega T7 · se publica T8 | | ronda 2 |
+| 10 | Clustering: K-means, jerárquico y DBSCAN | entrega T7 | | ronda 2 |
 | 11 | **Crítica #4** | entrega T8 | **Examen 2** | ronda 2 |
 | 12 | *Colchón:* repaso o lo que se haya recorrido | | | defensas pendientes |
 
