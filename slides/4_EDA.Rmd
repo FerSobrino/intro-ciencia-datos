@@ -76,23 +76,28 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 
 \normalsize
 
-- El orden importa: **primero mirar, después resumir**. Un `describe()` sin gráfica es Anscombe esperando a pasar
+- El orden si importa: primero mirar, después resumir. 
 
 # La distribución de una variable
 
 ## Una variable sola: conteos e histogramas
 
-**Categóricas** — el conteo por categoría es el punto de partida
+**Categóricas** — primero contar cuantas cosas hay por categoría 
 
 - ¿El orden es el esperado? Las **ordinales hay que declararlas** como tales, o `pandas` las ordena alfabéticamente
-- Con muchísimas categorías la gráfica deja de comunicar: agrupa la cola larga en `otros`
-- **Ojo con promediar categorías**: si codificas [1, 2, 3] y sacas promedio, puedes obtener 2 aunque nadie haya escogido 2
+- Si tienes muchas categorías la gráfica no va a servir: agrupa la cola larga en `otros`
+- Ojo con promediar categorías: si codificas [1, 2, 3] y sacas promedio, puedes obtener 2 aunque nadie haya escogido 2
 
-**Continuas** — el histograma parte el rango en intervalos iguales y cuenta
 
-- Lo que buscamos es **señal**: un pico, una tendencia central
-- Una distribución uniforme (todas las cajas igual de altas) es señal de que *no hay señal*
-- Error común: creer que los datos continuos "deberían" seguir una normal. En la naturaleza casi ninguna variable lo hace
+## Una variable sola: conteos e histogramas
+
+**Continuas** — un histograma es el primer paso
+
+- Lo que buscamos es que la distribución de vea como esperamos que sea 
+- Si tiene alguna clase de señal: picos, tendencias centrales, colas pesadas
+- Ojo: los datos continuos no tienen que distribuirse como una normal
+- En la naturaleza casi ninguna variable se va a ver así 
+
 
 ## El parámetro cambia la historia
 
@@ -101,31 +106,19 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 \includegraphics[width=0.28\textwidth]{../images/histogram_bins_2.png}
 \end{center}
 
-- Los **mismos datos** con `bins` por defecto y con `bins=50`: con 50 cajas aparece la estructura fina; con pocas se suaviza y se pierde
-- La barra en 50 no es ruido: es un **tope de codificación** (todo valor ≥ 50 se registró como 50), y solo se ve con suficientes cajas
-- Igual con la **densidad** (`kde`): ancho de banda grande → curva suave; chico → ruido puro
-- Regla: prueba **dos anchos** antes de concluir algo sobre la forma, y reporta histograma y densidad juntos
+- Los mismos datos con `bins` por defecto y con `bins=50`
 
-## Sesgo y transformaciones
 
-- Sesgo a la derecha: cola larga a la derecha (ingreso, empleo, población, precios). A la izquierda: cola larga a la izquierda (edad de jubilación, calificaciones con techo)
-- Una variable muy sesgada comprime la masa central en un pedacito de la gráfica: **no se puede inspeccionar visualmente**
-- Antes de "arreglarla", **investiga la cola**: la cola de `all.emp` son Cook (Chicago), Los Ángeles y los cinco condados de Nueva York — el 20% de condados más poblados concentra el 85.9% del empleo
-- Si la cola tiene explicación sustantiva, no es un problema: **es el fenómeno**
-- Muchos modelos suponen normalidad. Sesgo a la derecha → **logaritmo** o **raíz**; a la izquierda → cuadrado
-- El **gráfico QQ** dice si sirvió: tus cuantiles contra los de una normal teórica — entre más pegados a la recta, mejor
-- No transformes a ciegas: ganas supuestos y **pierdes interpretabilidad**
 
 # Centralidad, dispersión y valores extremos
 
 ## Media vs. mediana
 
-- **Media**: sensible a la cola. En una variable sesgada, la media se va detrás de los valores extremos
-- **Mediana**: el valor de en medio; no le importa qué tan lejos esté la cola
+- **Media**: sensible a valores extremos. 
+- **Mediana**: el valor de en medio; no le importan los extremos 
 - **Moda**: la única que tiene sentido para datos ordinales o categóricos
-- Si comparas conteo, suma, media y mediana por región vas a ver **cuatro rankings distintos** de las mismas regiones
-- Regla práctica: si media y mediana difieren mucho, la variable es sesgada y **la mediana es el resumen honesto**
-- En política pública esto importa: "el ingreso promedio del municipio" y "el ingreso del habitante típico" no son lo mismo
+- Regla práctica: si media y mediana difieren mucho, la variable es sesgada
+
 
 ## Dispersión: qué tan lejos están del centro
 
@@ -135,16 +128,14 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 | Medida | Interpretación | Cuidado |
 |--------------|-----------------------------|-----------------------|
 | Varianza | Grado de dispersión; alto = datos lejos del promedio | Está en unidades al cuadrado |
-| Desviación estándar | Raíz de la varianza; en **las mismas unidades** que el promedio | Igual de sensible a outliers que la media |
+| Desviación estándar | Raíz de la varianza; en las mismas unidades que el promedio | Igual de sensible a outliers que la media |
 | Rango intercuartil (IQR) | Ancho del 50% central | Robusto: es el que usa el boxplot |
-| Coeficiente de variación | sd / media, en % — permite comparar variables con **unidades distintas** | Un CV > 100% dice que el promedio casi no informa |
+| Coeficiente de variación | sd / media, en % — permite comparar variables con unidades distintas | Un CV > 100% dice que el promedio casi no informa |
 
-\normalsize
 
-- Para pensar: dos poblaciones con la misma estatura promedio pero varianzas muy distintas, ¿son la misma población?
-- Si un intervalo de confianza contiene valores positivos y negativos, **no puedes concluir que el efecto es positivo**
 
-## Valores extremos: cómo se ven y qué hacer
+
+## Valores extremos: cómo se ven
 
 ::::: columns
 ::: {.column width="38%"}
@@ -160,7 +151,15 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 :::
 :::::
 
-Tres opciones, ninguna gratis: **tirarlos** (pierdes información y sesgas si el extremo es real), **convertirlos en faltantes** (conservas el renglón, marcas la duda), **winsorizar** (recortar al percentil 1 y 99).
+## Valores extremos: qué hacer con ellos
+
+Tres opciones, ninguna gratis:
+
+- **Tirarlos** — pierdes información y sesgas si el extremo es real
+- **Convertirlos en faltantes** — conservas el renglón, marcas la duda
+- **Winsorizar** — recortar al percentil 1 y 99
+
+\vspace{0.5em}
 
 - ¿Cómo decidir? **Pregúntale a quien construyó la base** por qué esos valores son raros
 - En datos reales *toda* columna tiene basura: si tiras cada renglón con un valor raro, te quedas sin base
