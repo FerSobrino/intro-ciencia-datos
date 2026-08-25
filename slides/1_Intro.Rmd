@@ -158,7 +158,8 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 - Semanas 1–4: Datos — `pandas` (2 clases), datos limpios (tidy), **verificación de análisis con IA**
 - Semanas 4–6: EDA y visualización
 - Semanas 7–9: Aprendizaje supervisado — teoría, `sklearn`, métricas — *Examen 1 (semana 7)*
-- Semanas 10–11: Aprendizaje no supervisado (clustering) — *Examen 2 (semana 11)*
+- Semana 10: Aprendizaje no supervisado (clustering, si el tiempo alcanza)
+- Semana 11: Crítica #4 y *Examen 2* (solo aprendizaje supervisado)
 - Son 11 semanas efectivas (una sesión del semestre cae en feriado)
 
 ## Evaluación

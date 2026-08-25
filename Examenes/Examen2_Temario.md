@@ -1,9 +1,10 @@
-# Examen 2 — Aprendizaje de Máquina y Clustering (semana 11)
+# Examen 2 — Aprendizaje de Máquina Supervisado (semana 11)
 
 **Formato:** en clase, individual, lápiz y papel. Sin computadora, sin IA.
 **Peso:** 20% de la calificación final.
 **Material permitido:** una hoja (carta, por ambos lados) escrita a mano por ti.
-**Cobertura:** slides *ML Teoría 1–3*, *Supervisado en sklearn*, *Clustering*; Tareas 5–8; Críticas #3 y #4.
+**Cobertura:** slides *ML Teoría 1–3* y *Supervisado en sklearn*; Tareas 5–7; Críticas #3 y #4.
+**Nota:** el clustering (aprendizaje no supervisado) **no** entra en este examen.
 
 Igual que el Examen 1: no se escribe código. Se interpreta, se
 diagnostica y se justifica.
@@ -49,25 +50,24 @@ diagnostica y se justifica.
   son la métrica natural cuando hay presupuesto para atender k casos.
 - Umbral de decisión: qué cambia al moverlo y quién debería decidirlo.
 
-## 4. Clustering (Tarea 8, Crítica #4)
+## 4. Comparar modelos con honestidad (Crítica #4)
 
-- K-means: el algoritmo en palabras; por qué importa la
-  inicialización; el codo y la silueta para elegir k; cuándo falla
-  (grupos no esféricos, escalas distintas).
-- Jerárquico: leer un dendrograma, efecto del tipo de linkage, dónde
-  cortar.
-- DBSCAN: núcleo/frontera/ruido, `eps` y `minpts`, cuándo es preferible
-  a K-means.
-- **¿Son reales estos clusters?** Dado un resultado de clustering con
-  su silueta y descripción de variables: decidir si la interpretación
-  está justificada, detectar variables sin escalar, y explicar por qué
-  "el algoritmo encontró 4 grupos" no implica que existan 4 grupos.
+- ¿Por qué elegir hiperparámetros **mirando el conjunto de prueba** infla
+  el desempeño reportado? El papel de un conjunto de validación (o
+  validación cruzada) y la regla "el test se toca una sola vez".
+- Sobreajuste en la práctica: qué significa un accuracy de ~100% en
+  entrenamiento y por qué no es evidencia de que el modelo "aprendió".
+- Elegir la semilla/corrida "más representativa" entre varias: por qué
+  es *cherry-picking* y cómo se reporta honestamente (media y
+  variabilidad entre corridas).
+- Importancia de variables ≠ causalidad: qué afirmaciones sí y qué
+  afirmaciones no soporta un `feature_importances_`.
 
 ## 5. Verificación de pipelines hechos por IA (Críticas #3–#4)
 
 - Dado el esqueleto de un pipeline de sklearn escrito por un agente
   (en pseudocódigo o código impreso): señalar los errores (orden de
-  escalar/split, métrica equivocada, evaluación sobre train) y decir
-  cómo corregirlos.
+  escalar/split, métrica equivocada, evaluación sobre train, selección
+  de modelo sobre el test) y decir cómo corregirlos.
 - Dada una tabla de resultados sospechosamente buena, listar las tres
   primeras hipótesis a revisar antes de creerla.

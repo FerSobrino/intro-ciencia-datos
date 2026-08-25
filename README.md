@@ -74,6 +74,8 @@ entendimiento.*
 | 10 | Clustering | T7 | | |
 | 11 | Repaso | T8 | **Crítica #4** | **Examen 2** |
 
+*Si el semestre se recorta, se elimina la semana de clustering y la
+Tarea 8; el Examen 2 y la Crítica #4 no dependen de ese tema.*
 
 ## Política de IA (resumen)
 

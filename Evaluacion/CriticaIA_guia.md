@@ -22,7 +22,7 @@ corrección.
 | 1 | 4 | pandas y joins | merge que duplica renglones, groupby que descarta NaN, filtro mal puesto |
 | 2 | 6 | EDA y visualización | gráficas engañosas, afirmaciones no respaldadas por los datos |
 | 3 | 9 | pipeline supervisado | fuga de datos, métrica equivocada, evaluación sobre train |
-| 4 | 11 | clustering | variables sin escalar, k injustificada, sobreinterpretación de grupos |
+| 4 | 11 | comparación de modelos | selección de hiperparámetros sobre el test, sobreajuste vendido como éxito, cherry-picking de semillas, causalidad desde importancias |
 
 ## Qué entregan (al final de la sesión, en Canvas)
 
