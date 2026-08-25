@@ -2,7 +2,7 @@
 
 **TC 4025 · Escuela de Gobierno y Transformación Pública, Tec de Monterrey**
 Profesora: Fernanda Sobrino (fersobrinono@tec.mx)
-12 semanas, una sesión larga por semana · Entregas en Canvas
+11 semanas de contenido (+1 de colchón), una sesión larga por semana · Entregas en Canvas
 
 ## Filosofía del curso
 
@@ -58,21 +58,21 @@ entendimiento.*
 | Semana | Sesión |
 |---|---|
 | 1 | Introducción y política de IA · Pandas I (arranque con calma: entorno, leer y explorar datos) |
-| 2 | Pandas II: filtros, faltantes, groupby y pipes (*se publica T1*) |
-| 3 | Datos limpios (tidy) y joins — **entrega T1** |
-| 4 | Verificación de análisis con IA + **Crítica #1** — **entrega T2** |
-| 5 | EDA — **entrega T3** (inician defensas ronda 1) |
-| 6 | Visualización + **Crítica #2** — **entrega T4** |
-| 7 | **Examen 1** + ML Teoría I: modelos y train/test — **entrega T5** |
+| 2 | Pandas II: filtros, faltantes, groupby y pipes · Tidy I: los 4 patrones sucios (*se publica T1*) |
+| 3 | Tidy II: joins · Verificación de análisis con IA — **entrega T1** |
+| 4 | **Crítica #1** · EDA I — **entrega T2** |
+| 5 | EDA II · Visualización I — **entrega T3** (inician defensas ronda 1) |
+| 6 | Visualización II: gráficas que engañan · **Crítica #2** — **entrega T4** |
+| 7 | **Examen 1** · ML Teoría I: modelos y train/test — **entrega T5** |
 | 8 | ML Teoría II y III: clasificación y métricas de desempeño — **entrega T6** |
-| 9 | Aprendizaje supervisado en sklearn + **Crítica #3** (inician defensas ronda 2) |
+| 9 | Aprendizaje supervisado en sklearn · **Crítica #3** (inician defensas ronda 2) |
 | 10 | Clustering: K-means, jerárquico y DBSCAN — **entrega T7** |
-| 11 | **Crítica #4** + **Examen 2** — **entrega T8** |
-| 12 | Defensas finales · Cierre: git y flujo de trabajo con agentes |
+| 11 | **Crítica #4** · **Examen 2** — **entrega T8** |
+| 12 | *Colchón:* defensas pendientes, repaso, o lo que se haya recorrido |
 
 (Cada tarea se publica al cerrar el tema correspondiente y se entrega
 a la semana siguiente; la Tarea 7 — mini colaboración con IA — tiene
-dos semanas.)
+dos semanas. Git no se cubre aquí: lo ven en otra materia.)
 
 ## Política de IA (resumen)
 

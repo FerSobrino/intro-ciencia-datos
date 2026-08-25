@@ -18,7 +18,7 @@ descargado + tu transcripción de IA (ver `PoliticaIA.md`).
   [github.com/FerSobrino/intro-ciencia-datos](https://github.com/FerSobrino/intro-ciencia-datos)
 
 (De todos modos te conviene [crear tu cuenta de GitHub](https://github.com/signup)
-— gratis, la usarás en más clases y proyectos.)
+— gratis, la usarás en otras clases y te va a servir toda la carrera.)
 
 ## Descarga los materiales una sola vez (recomendado)
 
