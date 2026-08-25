@@ -179,3 +179,9 @@ REDISENO_NOTAS.md
 # el pdf de la política sí se versiona
 !PoliticaIA.pdf
 !tech-help/*.pdf
+
+# archivos de continuidad de sesión (solo instructora)
+docs/intro-ciencia-datos-session-summary.org
+TODO.org
+GIT_REMOTE
+handoff-trace.log
