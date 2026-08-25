@@ -1,6 +1,5 @@
 ---
-title: "Datos limpios"
-subtitle: "Tidy data"
+title: "Tidy Data"
 author: "Fernanda Sobrino"
 date: "2026"
 output:
@@ -18,13 +17,14 @@ knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 ```
 
-# ¿Por qué datos limpios?
+# ¿Qué son tidy data?
 
 ## Los datos nunca llegan listos
 
-- **Todos** los proyectos de ciencia de datos requieren limpiar los datos primero
-- Los datos de gobierno son el caso extremo: hechos para un trámite, no para un análisis
-- *Data tidying* = darle a la base una **estructura estándar** para poder analizarla
+- Todos los proyectos de ciencia de datos requieren limpiar los datos primero
+- Por lo general los datos del gobierno (y la mayoría de las empresas) no se pueden usar para hacer ciencia de datos en el estado en el que los usan los gobiernos/empresas
+- La mayoría estan hechos para otras cosas: operación, trámites, etc
+- *Data tidying* = darle a la base una estructura estándar para poder analizarla
 - No es trabajo previo al análisis: es la parte del análisis donde se cometen los errores caros
 
 ## Las tres reglas
@@ -50,12 +50,6 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 - Corolario: si para contestar tu pregunta tienes que "leer" el nombre de una columna, la base no está tidy
 - Y *tidy* depende de la pregunta: la misma tabla puede estar limpia para una cosa y sucia para otra
 
-## Cómo trabajaremos: estas slides son el mapa
-
-- **Estas slides son el resumen conceptual**: cómo se ve cada problema y qué operación lo resuelve
-- **Todo el código vive en el notebook**: `notebooks/Tidy.ipynb` — ahí se corre, se rompe y se verifica
-- El ritmo de la clase: reconocer el problema aquí → al notebook a arreglarlo → de regreso solo para el siguiente concepto
-- Para estudiar: el notebook es la referencia completa; estas slides son el repaso rápido de antes del examen
 
 # Los cuatro problemas
 
@@ -123,8 +117,6 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 2. **Todo lo que sale de texto, nace texto.** Después de partir una celda, las columnas nuevas son `object`. Un "promedio" de texto no truena: concatena
 3. **`str.split` no se queja.** Si un renglón tiene tres pedazos y otro ninguno, rellena con `None` y sigue. Los faltantes nuevos aparecen sin aviso
 4. **Limpiar cambia el conteo de renglones**, y eso es lo que hay que auditar: antes y después de cada operación, cuenta
-
-- Regla transversal: `pandas` no modifica en su lugar — si no asignaste el resultado, no pasó nada
 
 # Unir tablas: joins
 
