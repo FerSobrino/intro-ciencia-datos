@@ -1,6 +1,5 @@
 ---
 title: "Análisis exploratorio"
-subtitle: "Mirar los datos antes de modelar"
 author: "Fernanda Sobrino"
 date: "2026"
 output:
@@ -18,14 +17,14 @@ knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 ```
 
-# ¿Qué es el análisis exploratorio?
+# ¿Qué es el análisis exploratorio (EDA)?
 
 ## Mirar los datos antes de modelar
 
 > "Loosely speaking, any method of looking at data that does not include formal statistical modeling and inference falls under the term exploratory data analysis" — Howard Seltman
 
 - Origen: Mosteller y Tukey (1977), *Data analysis and regression*
-- La idea: **mira los datos para ver lo que parecen decir**, antes de imponerles un modelo
+- La idea: mira los datos para ver lo que parecen decir, antes de imponerles un modelo
 - Objetivos concretos:
   - entender la estructura del conjunto de datos y las variables importantes
   - detectar valores atípicos, anomalías y datos faltantes
@@ -38,7 +37,7 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 
 | Enfoque clásico | EDA |
 |--------------------------------|--------------------------------|
-| Problema → Datos → **Modelo** → Análisis → Conclusiones | Problema → Datos → **Análisis** → Modelo → Conclusiones |
+| Problema → Datos → Modelo → Análisis → Conclusiones | Problema → Datos → Análisis → Modelo → Conclusiones |
 | Impone el modelo | Los datos sugieren el modelo |
 | Técnicas cuantitativas: pruebas de hipótesis, ANOVA, mínimos cuadrados | Técnicas gráficas: histogramas, scatter plots, boxplots, residual plots |
 | Hace supuestos | Sin supuestos previos |
@@ -46,23 +45,19 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 
 \normalsize
 
-- No son rivales: EDA es lo que haces **antes** para que el modelo clásico tenga sentido
+- No son rivales: EDA es lo que haces antes para que el modelo clásico tenga sentido
 
 ## El cuarteto de Anscombe
 
-::::: columns
-::: {.column width="45%"}
-![](../images/anscombe.png){width=100%}
-:::
+\begin{center}
+\includegraphics[width=0.62\textwidth]{../images/anscombe.png}
+\end{center}
 
-::: {.column width="53%"}
+## El cuarteto de Anscombe: ¿qué estamos viendo?
 
-\raggedright
-- Cuatro conjuntos con **la misma media, la misma varianza, la misma recta de regresión y la misma correlación (r = 0.82)**
+- Cuatro conjuntos con la misma media, la misma varianza, la misma recta de regresión y la misma correlación (r = 0.82)
 - Y cuatro historias distintas: lineal, curva, un outlier que arrastra la recta, y una x casi constante
-- Moraleja: **es fácil falsear una estadística de resumen; es mucho más difícil falsear una distribución**
-:::
-:::::
+- Moraleja: es fácil falsear una estadística de resumen; es mucho más difícil falsear una distribución
 
 ## El mapa del EDA
 
