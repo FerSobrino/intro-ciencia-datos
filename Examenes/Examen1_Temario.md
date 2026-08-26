@@ -3,7 +3,7 @@
 **Formato:** en clase, individual, lápiz y papel. Sin computadora, sin IA.
 **Peso:** 15% de la calificación final.
 **Material permitido:** una hoja (carta, por ambos lados) escrita a mano por ti.
-**Cobertura:** slides *Intro*, *Pandas*, *Tidy*, *EDA*, *Visualización* y *Verificación de IA*; Tareas 1–4; Críticas #1 y #2.
+**Cobertura:** slides *Intro*, *Pandas*, *Tidy*, *EDA* y *Visualización*; Tareas 1–4; Críticas #1 y #2.
 
 Las preguntas **no** piden escribir código de memoria. Piden leer,
 predecir, diagnosticar y justificar — exactamente el tipo de
@@ -55,7 +55,7 @@ IA que sí escribe el código.
 - ¿Están diciendo lo mismo estas dos gráficas de los mismos datos?
   Explicar por qué una engaña.
 
-## 5. Verificación de análisis hechos por IA (deck *Verificación*, Críticas #1–#2)
+## 5. Verificación de análisis hechos por IA (visto en cada tema y en las Críticas #1–#2)
 
 - Dado un reporte corto "escrito por un agente" con 2–3 afirmaciones y
   la evidencia (tablas/gráficas): decir cuáles afirmaciones **no**

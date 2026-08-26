@@ -64,7 +64,7 @@ entendimiento.*
 |---|---|---|---|---|---|---|
 | 1 | Introducción y política de IA · Pandas I | [Intro](slides/1_Intro.pdf) · [Pandas](slides/2_Pandas.pdf) | [Pandas](notebooks/Pandas.ipynb) | | | |
 | 2 | Pandas II · Tidy I | [Pandas](slides/2_Pandas.pdf) · [Tidy](slides/3_Tidy.pdf) | [Pandas](notebooks/Pandas.ipynb) · [Tidy](notebooks/Tidy.ipynb) | | | |
-| 3 | Tidy II · Verificación de análisis con IA | [Tidy](slides/3_Tidy.pdf) · [Verificación IA](slides/9_Verificacion_IA.pdf) | [Tidy](notebooks/Tidy.ipynb) | T1 | | |
+| 3 | Tidy II | [Tidy](slides/3_Tidy.pdf) | [Tidy](notebooks/Tidy.ipynb) | T1 | | |
 | 4 | EDA I | [EDA](slides/4_EDA.pdf) | [EDA](notebooks/EDA.ipynb) | T2 | **Crítica #1** | |
 | 5 | EDA II · Visualización I | [EDA](slides/4_EDA.pdf) · [Visualización](slides/5_Visualizacion.pdf) | [EDA](notebooks/EDA.ipynb) · [Visualización](notebooks/Visualizacion.ipynb) | T3 | | |
 | 6 | Visualización II | [Visualización](slides/5_Visualizacion.pdf) | [Visualización](notebooks/Visualizacion.ipynb) | T4 | **Crítica #2** | |
