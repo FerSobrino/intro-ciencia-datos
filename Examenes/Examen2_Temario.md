@@ -3,7 +3,7 @@
 **Formato:** en clase, individual, lápiz y papel. Sin computadora, sin IA.
 **Peso:** 20% de la calificación final.
 **Material permitido:** una hoja (carta, por ambos lados) escrita a mano por ti.
-**Cobertura:** slides *ML Teoría 1–3* y *Supervisado en sklearn*; Tareas 5–7; Críticas #3 y #4.
+**Cobertura:** slides *ML Teoría 1–3*; notebooks de aprendizaje supervisado en `sklearn`; Tareas 5–7; Críticas #3 y #4.
 **Nota:** el clustering (aprendizaje no supervisado) **no** entra en este examen.
 
 Igual que el Examen 1: no se escribe código. Se interpreta, se

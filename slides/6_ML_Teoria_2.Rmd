@@ -97,6 +97,7 @@ $k = 1$ \hspace{4.2em} $k = 3$ \hspace{4.2em} $k = 5$
 
 - **Categóricas**: no hay distancia entre "primaria" y "licenciatura". Se convierten con *one-hot encoding*: una columna 0/1 por categoría
 - Codificarlas como 1, 2, 3 le inventa al modelo una jerarquía y unas distancias que no existen
+- El codificador también se aprende **solo con train** — y hay que decidir qué hacer con una categoría que solo aparece en test
 
 ## Todo tiene que ser numérico y comparable 
 
@@ -285,7 +286,7 @@ $$Entropia = -\sum_i p_i \log_2 p_i$$
 
 \centering
 
-Llega un día nuevo: **humedad alta, temperatura normal**. ¿Jugamos?
+Llega un día nuevo: humedad alta, temperatura normal. ¿Jugamos?
 
 \raggedright
 
@@ -293,7 +294,7 @@ Llega un día nuevo: **humedad alta, temperatura normal**. ¿Jugamos?
 
 - Raíz: ¿humedad? Alta → nos vamos a la derecha
 - Siguiente: ¿temperatura? Normal → hoja de la derecha
-- Predicción: **sí jugar**, con una confianza de 2/3
+- Predicción: sí jugar, con una confianza de 2/3
 
 \vspace{0.8em}
 
@@ -318,7 +319,7 @@ Llega un día nuevo: **humedad alta, temperatura normal**. ¿Jugamos?
 \small 59 años, 364 días → «riesgo bajo» \hspace{2.5em} 60 años, 0 días → «riesgo alto»
 \end{center}
 
-- Un corte es una frontera **dura**: con ¿edad $\geq$ 60?, la misma persona cae en hojas opuestas con un día de diferencia
+- Un corte es una frontera dura: con ¿edad $\geq$ 60?, la misma persona cae en hojas opuestas con un día de diferencia
 - Es el espejo de la trampa de KNN: KNN convierte a dos personas distintas en el mismo punto; el árbol convierte a la misma persona en dos casos opuestos
 - Casi nada en el mundo cambia de golpe en un umbral, pero el árbol solo sabe dibujar escalones: cerca del corte, desconfía de la predicción
 
@@ -326,21 +327,21 @@ Llega un día nuevo: **humedad alta, temperatura normal**. ¿Jugamos?
 
 ## Random Forest: el promedio de muchos árboles
 
-- Si un árbol es inestable, hagamos **muchos** y promediemos. Un bosque aleatorio es un ensamble de árboles
+- Si un árbol es inestable, hagamos muchos y promediemos. Un bosque aleatorio es un ensamble de árboles
 - La diversidad se fabrica a propósito, de dos formas:
-  1. Cada árbol se entrena con una **muestra aleatoria con reemplazo** de los datos (*bagging*)
-  2. En cada corte, cada árbol solo puede ver un **subconjunto aleatorio de features**
-- La predicción final es el **voto** de todos los árboles (o el promedio de sus probabilidades)
+  1. Cada árbol se entrena con una muestra aleatoria con reemplazo de los datos (*bagging*)
+  2. En cada corte, cada árbol solo puede ver un subconjunto aleatorio de features
+- La predicción final es el voto de todos los árboles (o el promedio de sus probabilidades)
 - Ganamos mucho poder predictivo y baja la varianza. Perdemos la regla legible: 500 árboles no se explican en una tarjeta
-- La regla del curso: si el bosque no le gana claramente al árbol, quédate con el árbol
+- Si el bosque no le gana claramente al árbol, quédate con el árbol
 
-## Pregúntale al público
+## ¿Cómo entender esto de manera intuitiva? 
 
 - En *¿Quién quiere ser millonario?* había dos comodines: llamar a un amigo experto o preguntarle al público
 - El amigo experto acertaba cerca del **65%** de las veces; el público, cerca del **91%**
-- Muchas opiniones mediocres pero **diversas**, promediadas, le ganan a una sola opinión inteligente
+- Muchas opiniones mediocres pero diversas, promediadas, le ganan a una sola opinión inteligente
 - Eso es un Random Forest: cada árbol es un miembro del público que vio datos distintos y features distintas
-- La condición escondida: los errores deben ser **independientes**. Si todo el público repite el mismo rumor — o todos los árboles dependen de la misma columna dominante — el promedio no arregla nada. Por eso el bosque fabrica la diversidad a propósito
+- La condición escondida: los errores deben ser independiente. Si todo el público repite el mismo rumor — o todos los árboles dependen de la misma columna dominante — el promedio no arregla nada. Por eso el bosque fabrica la diversidad a propósito
 
 ## Regresión logística, en intuición
 
@@ -350,18 +351,38 @@ Llega un día nuevo: **humedad alta, temperatura normal**. ¿Jugamos?
 
 \raggedright
 
-- Queremos una **probabilidad**, y una recta se sale de $[0,1]$. La logística la "aplasta" con una curva en forma de S
-- Cada variable tiene un **coeficiente interpretable**: cuánto mueve la probabilidad, en qué dirección
-- Sale un número entre 0 y 1 — y para actuar hace falta elegir un corte (el tema de la próxima clase)
+- Queremos una probabilidad, y una recta se sale de $[0,1]$. La logística la "aplasta" con una curva en forma de S
+- Cada variable tiene un coeficiente interpretable: cuánto mueve la probabilidad, en qué dirección
+- Cómo leerlo: $\exp(\text{coef})$ es el **odds ratio** — 1.4 significa "los odds suben 40% por unidad". Comparar coeficientes entre sí solo vale si las variables están escaladas, y un coeficiente **no** es un efecto causal
+- Sale un número entre 0 y 1 — y para actuar hace falta elegir un corte
 - Es la línea base obligatoria de casi cualquier problema de clasificación
 
 ## Naive Bayes, en intuición
 
 - Le da la vuelta a la pregunta con el teorema de Bayes: $P(y \mid X) = \dfrac{P(X \mid y)\,P(y)}{P(X)}$
 - En vez de "¿qué tan probable es que sea spam dadas estas palabras?", pregunta "¿qué tan probable es ver estas palabras en un spam?" — y eso sí se puede contar
-- Es **naive** (ingenuo) porque supone que las features son **independientes** entre sí. Casi nunca es cierto: "gratis" y "oferta" aparecen juntas
-- Aun así funciona sorprendentemente bien, es rapidísimo y sirve con pocos datos
-- Sus probabilidades están mal calibradas: úsalas para **ordenar** casos, no como probabilidades reales
+- Es naive (ingenuo) porque supone que las features son independientes entre sí. Casi nunca es cierto. 
+- Aun así funciona sorprendentemente bien, es rápido y sirve con pocos datos
+- Sus probabilidades están mal calibradas: úsalas para ordenar casos, no como probabilidades reales
+
+## ¿Cuál modelo uso?
+
+\vspace{0.4em}
+\footnotesize
+
+| Modelo | Escalar | Fuerte en | Débil en |
+|---|---|---|---|
+| Logística | conviene | explicar, línea base | relaciones no lineales |
+| KNN | **obligatorio** | fronteras irregulares | muchas features, predicción lenta |
+| Árbol | no | reglas legibles | inestable, sobreajusta |
+| Bosque | no | desempeño tabular | caja negra |
+| Naive Bayes | no | texto, velocidad | supuesto de independencia |
+
+\normalsize
+\vspace{0.3em}
+
+- Empieza por la logística, y compara siempre contra una **línea base tonta**: predecir la clase mayoritaria
+- Nota la columna de escalar: en KNN es obligatorio, en árboles irrelevante — y en ambos casos el código corre igual
 
 ## Qué verificar cuando el agente hace esto
 

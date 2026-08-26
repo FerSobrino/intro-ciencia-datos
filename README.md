@@ -70,7 +70,7 @@ entendimiento.*
 | 6 | Visualización II | [Visualización](slides/5_Visualizacion.pdf) | [Visualización](notebooks/Visualizacion.ipynb) | T4 | **Crítica #2** | |
 | 7 | ML Teoría I | [ML Teoría I](slides/6_ML_Teoria_1.pdf) | [ML Teoría](notebooks/ML_Teoria.ipynb) | T5 | | **Examen 1** |
 | 8 | ML Teoría II y III | [ML Teoría II](slides/6_ML_Teoria_2.pdf) · [III](slides/6_ML_Teoria_3.pdf) | [ML Teoría](notebooks/ML_Teoria.ipynb) | T6 | | |
-| 9 | Aprendizaje supervisado en sklearn | [Supervisado sklearn](slides/7_Supervisado_sklearn.pdf) | [Logística y Naive Bayes](notebooks/Logistic_Regression_NaiveBayes.ipynb) · [KNN, árboles y RF](notebooks/KNN_DecisionTrees_RF.ipynb) | | **Crítica #3** | |
+| 9 | Aprendizaje supervisado en sklearn | — | [Logística y Naive Bayes](notebooks/Logistic_Regression_NaiveBayes.ipynb) · [KNN, árboles y RF](notebooks/KNN_DecisionTrees_RF.ipynb) | | **Crítica #3** | |
 | 10 | Clustering | [Clustering](slides/8_Clustering.pdf) | [K-means y jerárquico](notebooks/Clustering_K-means_Hierarchical.ipynb) · [DBSCAN](notebooks/Clustering_DBSCAN.ipynb) | T7 | | |
 | 11 | Repaso | — | — | T8 | **Crítica #4** | **Examen 2** |
 

@@ -253,3 +253,23 @@ Las tres se ven igual desde afuera: un modelo con resultados demasiado buenos.
 - Revisa fechas: ¿alguna variable tiene fecha posterior a la etiqueta?
 - Y sobre todo: desconfía de los buenos resultados. Un AUC de 0.99 no es un modelo genial probablemente es una fuga
 
+## El orden de las operaciones (el resumen de todo)
+
+\vspace{0.3em}
+\footnotesize
+
+| Orden | Paso | Con qué datos |
+|---|---|---|
+| 1 | **Partir** en train y test | todos, una sola vez |
+| 2 | **Aprender** las transformaciones (escalar, imputar, codificar) | **solo train** |
+| 3 | **Aplicar** esas transformaciones | train **y** test |
+| 4 | **Entrenar** el modelo | solo train |
+| 5 | **Elegir** hiperparámetros y umbral | validación (nunca test) |
+| 6 | **Evaluar** | solo test, una vez |
+
+\normalsize
+\vspace{0.2em}
+
+- Si un paso "aprende" algo de los datos, va **después** del split
+- Este es el contenido de la clase completo en una tabla: el resto es sintaxis, y la sintaxis la pone el agente
+
