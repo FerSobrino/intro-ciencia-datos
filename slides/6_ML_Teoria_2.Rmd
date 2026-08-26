@@ -122,6 +122,20 @@ $$(\Delta\text{ingreso})^2 = 20{,}000^2 = 400{,}000{,}000 \qquad (\Delta\text{es
 - Sufre con muchas features: en muchas dimensiones todo queda lejos de todo
 - Elegir $k$ depende del problema y de quien modela
 
+## El vecino más cercano de Carlos III
+
+\begin{center}
+\includegraphics[height=2.6cm]{../images/king_charles.jpg}\hspace{1.5em}
+\includegraphics[height=2.6cm]{../images/ozzy_osbourne.jpg}
+
+\vspace{0.2em}
+\small Nacidos en 1948 · criados en Inglaterra · casados dos veces · hijos famosos · ricos · viven en un castillo
+\end{center}
+
+- Con esas seis features, para KNN son **el mismo punto**: distancia casi cero, cada uno es el vecino más cercano del otro
+- "Cercano" solo significa cercano **en las columnas que tú elegiste**; la distancia no ve nada más
+- Antes de confiar en los vecinos, pregunta: ¿parecidos según qué? ¿Esas features capturan lo que importa para *esta* predicción?
+
 # Árboles de decisión
 
 ## Titanic: la ficción contra los datos
