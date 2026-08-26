@@ -154,7 +154,7 @@ Si la $y$ es **numérica** el problema es de regresión; si es **categórica**, 
 
 \raggedright
 - Imagina entrenar el mismo modelo muchas veces, cada vez con una muestra distinta de datos: cada punto es uno de esos modelos; el centro es el patrón real
-- **Sesgo**: qué tan lejos del centro caes *en promedio*. Es el error del modelo demasiado simple: ni con datos infinitos le atinaría (subajuste)
+- **Sesgo**: qué tan lejos del centro caes en promedio. Es el error del modelo demasiado simple: ni con datos infinitos le atinaría (subajuste)
 - **Varianza**: qué tanto cambia tu tiro de muestra a muestra. Es el error del modelo que memoriza: cada muestra le cuenta un ruido distinto (sobreajuste)
 :::
 :::::
@@ -270,6 +270,6 @@ Las tres se ven igual desde afuera: un modelo con resultados demasiado buenos.
 \normalsize
 \vspace{0.2em}
 
-- Si un paso "aprende" algo de los datos, va **después** del split
-- Este es el contenido de la clase completo en una tabla: el resto es sintaxis, y la sintaxis la pone el agente
+- Si un paso "aprende" algo de los datos, va después del split
+
 

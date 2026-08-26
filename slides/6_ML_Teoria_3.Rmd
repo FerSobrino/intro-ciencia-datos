@@ -348,11 +348,11 @@ recall_at_k    = top_k["real"].sum() / y_test.sum()    # cobertura
 
 ## ¿Qué métrica de equidad? (cont.)
 
-- No existe "el modelo justo": existen **definiciones de equidad incompatibles entre sí**, y hay que elegir una
-- La pregunta clave es si la intervención es **punitiva** (te puede dañar) o **asistiva** (te ayuda)
-  - Punitiva → cuida los **falsos positivos**: no castigar de más a un grupo
-  - Asistiva → cuida los **falsos negativos**: no dejar fuera a quien más lo necesita
-- Elegir la métrica es elegir a quién proteger. **La métrica codifica valores** — y alguien tiene que firmarla
+- No existe "el modelo justo": existen definiciones de equidad incompatibles entre sí, y hay que elegir una
+- La pregunta clave es si la intervención es punitiva (te puede dañar) o asistiva (te ayuda)
+  - Punitiva → cuida los falsos positivos: no castigar de más a un grupo
+  - Asistiva → cuida los falsos negativos: no dejar fuera a quien más lo necesita
+- Elegir la métrica es elegir a quién proteger. La métrica codifica valores — y alguien tiene que firmarla
 
 ## Qué verificar cuando el agente hace esto
 
@@ -366,3 +366,4 @@ recall_at_k    = top_k["real"].sum() / y_test.sum()    # cobertura
 5. **¿De dónde salió el umbral?** Si es 0.5, es el default de `predict`, no una decisión. Pide la curva precisión–cobertura y quién eligió el punto
 6. **¿Desagregó por grupo?** Pide las métricas por sexo, edad, región o grupo relevante: el promedio esconde el daño
 7. **¿La métrica corresponde al costo real del error?** Pregúntale explícitamente qué cuesta más aquí, un FP o un FN, y verifica que la métrica que reportó castigue **ese** error
+8. **La IA no puede tomar decisiones por nadie** que es más costoso depende del problema y a veces es una decisión moral. 
