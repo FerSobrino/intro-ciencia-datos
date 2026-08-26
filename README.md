@@ -60,19 +60,19 @@ entendimiento.*
 
 ## Temario semanal (una sesión por semana)
 
-| Semana | Temas | Tareas | Crítica IA | Exámenes |
-|---|---|---|---|---|
-| 1 | Introducción y política de IA · Pandas I | | | |
-| 2 | Pandas II · Tidy I | | | |
-| 3 | Tidy II · Verificación de análisis con IA | T1 | | |
-| 4 | EDA I | T2 | **Crítica #1** | |
-| 5 | EDA II · Visualización I | T3 | | |
-| 6 | Visualización II | T4 | **Crítica #2** | |
-| 7 | ML Teoría I | T5 | | **Examen 1** |
-| 8 | ML Teoría II y III | T6 | | |
-| 9 | Aprendizaje supervisado en sklearn | | **Crítica #3** | |
-| 10 | Clustering | T7 | | |
-| 11 | Repaso | T8 | **Crítica #4** | **Examen 2** |
+| Semana | Temas | Slides | Notebook | Tareas | Crítica IA | Exámenes |
+|---|---|---|---|---|---|---|
+| 1 | Introducción y política de IA · Pandas I | [Intro](slides/1_Intro.pdf) · [Pandas](slides/2_Pandas.pdf) | [Pandas](notebooks/Pandas.ipynb) | | | |
+| 2 | Pandas II · Tidy I | [Pandas](slides/2_Pandas.pdf) · [Tidy](slides/3_Tidy.pdf) | [Pandas](notebooks/Pandas.ipynb) · [Tidy](notebooks/Tidy.ipynb) | | | |
+| 3 | Tidy II · Verificación de análisis con IA | [Tidy](slides/3_Tidy.pdf) · [Verificación IA](slides/9_Verificacion_IA.pdf) | [Tidy](notebooks/Tidy.ipynb) | T1 | | |
+| 4 | EDA I | [EDA](slides/4_EDA.pdf) | [EDA](notebooks/EDA.ipynb) | T2 | **Crítica #1** | |
+| 5 | EDA II · Visualización I | [EDA](slides/4_EDA.pdf) · [Visualización](slides/5_Visualizacion.pdf) | [EDA](notebooks/EDA.ipynb) · [Visualización](notebooks/Visualizacion.ipynb) | T3 | | |
+| 6 | Visualización II | [Visualización](slides/5_Visualizacion.pdf) | [Visualización](notebooks/Visualizacion.ipynb) | T4 | **Crítica #2** | |
+| 7 | ML Teoría I | [ML Teoría I](slides/6_ML_Teoria_1.pdf) | [ML Teoría](notebooks/ML_Teoria.ipynb) | T5 | | **Examen 1** |
+| 8 | ML Teoría II y III | [ML Teoría II](slides/6_ML_Teoria_2.pdf) · [III](slides/6_ML_Teoria_3.pdf) | [ML Teoría](notebooks/ML_Teoria.ipynb) | T6 | | |
+| 9 | Aprendizaje supervisado en sklearn | [Supervisado sklearn](slides/7_Supervisado_sklearn.pdf) | [Logística y Naive Bayes](notebooks/Logistic_Regression_NaiveBayes.ipynb) · [KNN, árboles y RF](notebooks/KNN_DecisionTrees_RF.ipynb) | | **Crítica #3** | |
+| 10 | Clustering | [Clustering](slides/8_Clustering.pdf) | [K-means y jerárquico](notebooks/Clustering_K-means_Hierarchical.ipynb) · [DBSCAN](notebooks/Clustering_DBSCAN.ipynb) | T7 | | |
+| 11 | Repaso | — | — | T8 | **Crítica #4** | **Examen 2** |
 
 *Si el semestre se recorta, se elimina la semana de clustering y la
 Tarea 8; el Examen 2 y la Crítica #4 no dependen de ese tema.*
