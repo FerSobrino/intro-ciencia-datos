@@ -54,8 +54,8 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 
 - **Explorar**: encontrar patrones que no sabías que estaban ahí (Snow)
 - **Entender**: darle forma a algo que ya medías (el Congreso)
-- **Explicar**: comunicar un hallazgo a alguien que no vio todas las peliculas (Disney)
-- **Preguntar**: casi siempre una buena gráfica genera mas preguntas 
+- **Explicar**: comunicar un hallazgo a alguien que no vio todas las películas (Disney)
+- **Preguntar**: casi siempre una buena gráfica genera más preguntas
 
 \vspace{0.8em}
 
