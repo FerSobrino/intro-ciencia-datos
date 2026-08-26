@@ -25,11 +25,11 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 
 ## \textquotedblleft El modelo tiene 92%\textquotedblright{} \textemdash{} ¿y?
 
-- Un número solo no dice nada. Un 92% puede ser un modelo excelente o un modelo peor que no hacer nada
+- Un número solo no dice nada. Un 92% puede ser un modelo excelente o un modelo bastante malo
 - Tres preguntas antes de mirar cualquier métrica:
-  1. **¿92% de qué?** ¿Qué está contando exactamente esa métrica?
-  2. **¿Comparado con qué?** ¿Cómo se resuelve el problema hoy?
-  3. **¿Qué error está escondiendo?** Toda métrica resume, y resumir es tirar información
+  1. ¿92% de qué? ¿Qué está contando exactamente esa métrica?
+  2. ¿Comparado con qué? ¿Cómo se resuelve el problema hoy?
+  3. ¿Qué error está escondiendo? Toda métrica resume, y resumir es tirar información
 - Hoy: qué mide cada métrica, cuál mentira cuenta cada una, y por qué **elegir la métrica es una decisión de política pública**
 
 ## Baserate y baseline
@@ -37,9 +37,9 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 **Baserate**: la tasa actual de lo que queremos predecir
 
 - Si el 2% de los establecimientos tiene una violación grave, ese 2% es el baserate
-- Es lo que queremos *afectar* con la acción, y cambia según cuándo lo midas
+- Es lo que queremos afectar con la acción, y cambia según cuándo lo midas
 
-**Baseline**: el desempeño de cómo se hace el trabajo **hoy**, medido con la misma métrica
+**Baseline**: el desempeño de cómo se hace el trabajo hoy, medido con la misma métrica
 
 - Las inspecciones se hacen al azar
 - Las inspecciones se hacen por antigüedad del establecimiento
@@ -63,22 +63,22 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 
 - **Falso positivo** (error tipo I): dije que sí y era no. Molesté a quien no debía
 - **Falso negativo** (error tipo II): dije que no y era sí. Se me escapó
-- Los cuatro números son la materia prima: **todas** las métricas de clasificación salen de esta tabla
+- Los cuatro números son la materia prima: todas las métricas de clasificación salen de esta tabla
 - Antes de calcular nada, mira los cuatro. Ninguna métrica sustituye ver la matriz completa
 
-## ¿Cuál error duele más?
+## ¿Cuál error es peor?
 
 **Un falso positivo es más grave cuando...**
 
 - Una persona inocente es condenada: apelar es lento, caro y muchas veces no ocurre
 - Se le retira un apoyo a un hogar que sí calificaba
-- La intervención es **punitiva**: multar, sancionar, detener, negar
+- La intervención es punitiva: multar, sancionar, detener, negar
 
 **Un falso negativo es más grave cuando...**
 
 - Un diagnóstico de cáncer se pierde: un falso positivo se desmiente con la siguiente prueba; un falso negativo avanza en silencio
 - Un establecimiento peligroso nunca se inspecciona
-- La intervención es **asistiva** y el costo de intervenir de más es bajo
+- La intervención es asistiva y el costo de intervenir de más es bajo
 
 \begin{center}\textbf{Esta pregunta se contesta antes de modelar, no después.}\end{center}
 
@@ -112,8 +112,8 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 
 - 7 entidades de alto riesgo, y el modelo encontró 3
 - Solo se equivocó una vez señalando de más
-- Los cuatro números ya cuentan la historia: **este modelo es cauteloso y se le escapa más de la mitad**
-- Si el objetivo es no dejar pasar riesgos, es un mal modelo. Si el objetivo es no molestar de más, no es tan malo
+- Los cuatro números ya cuentan la historia: este modelo es cauteloso y se le escapa más de la mitad
+- Si el objetivo es no dejar pasar riesgos, es un mal modelo. Si el objetivo es no molestar de más, no parece tan malo
 
 ## Accuracy
 
@@ -147,22 +147,22 @@ Modelo propuesto: *"ninguno tiene violación"*. Una línea de código, cero inte
 
 \normalsize
 
-- 98% de accuracy y **cero** utilidad: no encuentra ni un solo caso de los que importan
+- 98% de accuracy y cero utilidad: no encuentra ni un solo caso de los que importan
 - Con clases desbalanceadas, el accuracy mide qué tan rara es la clase positiva, no qué tan bueno es el modelo
 - Y desbalanceados están casi todos los problemas de política pública
 
 # Precisión y cobertura
 
-## Eficiencia y cobertura
+## Precisión y cobertura
 
 \centering
 
 ![](../images/precision_recall.png){width=24%}
 
-## Eficiencia y cobertura (cont.)
+## Precisión y cobertura
 
-- **Precisión** $= \dfrac{VP}{VP+FP}$: de los que señalé, ¿cuántos eran? Es la **eficiencia** del recurso
-- **Cobertura** (*recall*) $= \dfrac{VP}{VP+FN}$: de los que había, ¿a cuántos encontré? Es la **cobertura** del problema
+- **Precisión** $= \dfrac{VP}{VP+FP}$: de los que señalé, ¿cuántos eran? 
+- **Cobertura** (*recall*) $= \dfrac{VP}{VP+FN}$: de los que había, ¿a cuántos encontré? 
 - Precisión responde por quien paga la inspección. Cobertura responde por quien se queda sin ella
 
 ## Las dos se pelean
@@ -172,7 +172,7 @@ Modelo propuesto: *"ninguno tiene violación"*. Una línea de código, cero inte
 - Los dos extremos son inútiles y los dos se ven bien en una métrica:
   - "Todos tienen cáncer": cobertura 100%, precisión igual al baserate
   - Señalar un solo caso, el más obvio: precisión 100%, cobertura ~0%
-- **Nunca reportes una sin la otra.** Un agente que solo te da precisión te está dando media historia
+
 
 ## F1
 
@@ -184,10 +184,10 @@ Modelo propuesto: *"ninguno tiene violación"*. Una línea de código, cero inte
 
 \vspace{0.3em}
 
-- Es la **media armónica** de precisión y cobertura: un solo número que castiga fuerte si alguna de las dos está mal
+- Es la media armónica de precisión y cobertura: un solo número que castiga fuerte si alguna de las dos está mal
 - Sirve para comparar modelos rápido y con clases desbalanceadas es mucho mejor que el accuracy
-- Su defecto: le da **el mismo peso** a los dos errores. Si en tu problema un FN cuesta diez veces más que un FP, F1 está mintiendo por construcción
-- Úsalo para ordenar candidatos, no para decidir
+- Le da el mismo peso a los dos errores. Si en tu problema un FN cuesta más que un FP, F1 no ayuda mucho
+
 
 ## Las métricas del ejercicio
 
@@ -217,11 +217,11 @@ Con VP = 3, FP = 1, FN = 4, VN = 2:
 
 \raggedright
 
-- No hay un punto: hay una **curva**. Cada punto es un umbral distinto del mismo modelo
-- Se lee así: "si quiero 60% de cobertura, mi precisión será de 81%". Esa frase sí es accionable
-- Con clases muy desbalanceadas, esta curva dice mucho más que la ROC
+- No hay un punto: hay una curva. Cada punto es un umbral distinto del mismo modelo
+- Se lee así: "si quiero 60% de cobertura, mi precisión será de 81%"
 
-## La curva ROC
+
+## La curva ROC (Receiver Operating Characteristic)
 
 \centering
 
@@ -229,17 +229,17 @@ Con VP = 3, FP = 1, FN = 4, VN = 2:
 
 \raggedright
 
-- Grafica la tasa de verdaderos positivos contra la de falsos positivos, **para todos los umbrales posibles**
+- Grafica la tasa de verdaderos positivos contra la de falsos positivos, para todos los umbrales posibles
 - Mejor modelo = curva que se pega a la esquina superior izquierda
 - La diagonal es el azar: un modelo que tira volados
 
 ## AUC: qué mide y qué esconde
 
 - **AUC** es el área bajo la curva ROC: 0.5 = azar, 1.0 = perfecto
-- Mide qué tan bien el modelo **ordena** los casos: la probabilidad de que un positivo tomado al azar tenga mayor puntaje que un negativo
-- Es independiente del umbral y de la escala — y ahí está la trampa: **ignora el costo asimétrico de los errores**
-- Con una clase al 2%, un AUC de 0.85 puede convivir con una precisión pésima en los casos que sí vas a atender
-- Sirve para comparar modelos entre sí. **No** sirve para decidir a quién mandas un inspector
+- Mide qué tan bien el modelo separa las dos clases: la probabilidad de que un positivo tomado al azar tenga mayor puntaje que un negativo
+- Es independiente del umbral y de la escala
+- Ignora el costo asimétrico de los errores**
+- Sirve para comparar modelos entre sí.
 
 # Presupuesto: métricas @k
 
@@ -253,15 +253,15 @@ Con VP = 3, FP = 1, FN = 4, VN = 2:
 
 \vspace{0.3em}
 
-- No tienes 100,000 inspecciones: tienes **100 inspectores** y seis meses
-- La clasificación completa da igual. Lo único que importa son los **k casos que sí vas a atender**
-- El procedimiento: ordena por puntaje, corta en $k$, y calcula precisión y cobertura **ahí**
+- No tienes 100,000 inspecciones: tienes 100 inspectores y seis meses
+- La clasificación completa da igual. Lo único que importa son los k casos que sí vas a atender
+- El procedimiento: ordena por puntaje, corta en $k$, y calcula precisión y cobertura ahí
 - $k$ es tu presupuesto, tu personal, tus camas de hospital, tus becas. La restricción real
 - **precision@k** mide qué tan eficientes somos con el recurso; **recall@k**, cómo lo estamos repartiendo entre todos los que lo necesitan
 
 ## precision@k y recall@k, con números
 
-100,000 establecimientos, 2,000 con violación (2%), **100 inspectores**.
+100,000 establecimientos, 2,000 con violación (2%), 100 inspectores.
 
 | Estrategia | precision@100 | recall@100 |
 |---|---|---|
@@ -269,8 +269,8 @@ Con VP = 3, FP = 1, FN = 4, VN = 2:
 | Modelo, top 100 | **62%** | **3.1%** |
 | Modelo, top 200 (con el doble de inspectores) | 55% | 5.5% |
 
-- El modelo es **31 veces** más eficiente que el azar. Ese es el número que se le presenta a la autoridad
-- Pero fíjate en la cobertura: con 100 inspectores el **máximo posible** es 5% ($100/2{,}000$). El resto no es culpa del modelo, es del presupuesto
+- El modelo es 31 veces más eficiente que el azar. Ese es el número que se le presenta a la autoridad
+- Pero fíjate en la cobertura: con 100 inspectores el máximo posible es 5% ($100/2{,}000$). El resto no es culpa del modelo, es del presupuesto
 - Duplicar inspectores baja la precisión y sube la cobertura: siempre. Esa es la conversación real
 
 ## Cómo se calcula
@@ -287,7 +287,6 @@ recall_at_k    = top_k["real"].sum() / y_test.sum()    # cobertura
 ```
 
 - Requiere `predict_proba`, no `predict`: necesitas el **puntaje** para poder ordenar
-- Si el agente te reporta accuracy en un problema con presupuesto, está contestando otra pregunta
 
 # El umbral y quién decide
 
@@ -300,15 +299,15 @@ recall_at_k    = top_k["real"].sum() / y_test.sum()    # cobertura
 \raggedright
 
 - El modelo devuelve **0.37**. Eso no es una decisión: es un insumo
-- Entre el puntaje y la acción hay una **regla de decisión**: un umbral, o un top $k$
-- Esa regla no vive en el modelo. Vive en la política, en el presupuesto y en la ley
+- Entre el puntaje y la acción hay una regla de decisión: un umbral, o un top $k$
+- Esa regla no vive en el modelo. Vive en la política, en el presupuesto y/o en la ley
 
-## Elegir el umbral no es estadística
+## Elegir el umbral no es estadística es política
 
 - El 0.5 de `predict()` es un default arbitrario, no un hallazgo. Casi nunca es el umbral que quieres
-- Mover el umbral no cambia el modelo: **redistribuye los errores** entre falsos positivos y falsos negativos
+- Mover el umbral no cambia el modelo: redistribuye los errores entre falsos positivos y falsos negativos
 - Y eso es redistribuir daño entre personas concretas: quién es inspeccionado de más, quién se queda sin apoyo
-- Esa decisión no la puede tomar el modelo, ni quien lo programó, ni el agente de IA: la toma **quien responde por el programa**
+- Esa decisión no la puede tomar el modelo, ni quien lo programó, ni la IA: la toma quien responde por el programa
 - El trabajo técnico es poner sobre la mesa la curva y las opciones. El trabajo político es elegir un punto y defenderlo
 
 ## La misma métrica, distinta por grupo
@@ -317,7 +316,25 @@ recall_at_k    = top_k["real"].sum() / y_test.sum()    # cobertura
 
 ![](../images/aequitas_example.png){width=78%}
 
-## La misma métrica, distinta por grupo (cont.)
+## Cómo leer la gráfica
+
+\small Auditoría por grupo (herramienta *Aequitas*) de un modelo de reincidencia que señala a los $k=150$ de mayor riesgo. Conteos por grupo: `Prev.` = proporción positiva de verdad (su baserate), `PP` = señalados por el modelo, `FP`/`FN` los conocidos. \normalsize
+
+\vspace{0.2em}
+\scriptsize
+
+| Barra | Nombre | En palabras |
+|---|---|---|
+| PPrev | prevalencia predicha | qué proporción **del grupo** fue señalada (PP $\div$ tamaño) |
+| PPR | proporción de señalados | de **todos** los señalados, cuántos caen en este grupo |
+| FDR | tasa de falso descubrimiento | de los señalados del grupo, cuántos no eran ($= 1 -$ precisión) |
+| FOR | tasa de falsa omisión | de los **no** señalados, cuántos sí eran |
+| FPR | tasa de falsos positivos | de los que no eran, a cuántos señaló |
+| FNR | tasa de falsos negativos | de los que sí eran, a cuántos dejó ir ($= 1 -$ cobertura) |
+
+\normalsize
+
+## La misma métrica, distinta por grupo
 
 - El desempeño global esconde desempeños muy distintos por edad, género o grupo poblacional
 - Aquí un modelo con precision@150 = 0.73 tiene tasas de falsos positivos y falsos negativos que varían fuerte entre grupos
